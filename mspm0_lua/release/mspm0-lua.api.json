@@ -1,0 +1,6218 @@
+{
+  "$schema": "https://schemas.mspm0-lua.dev/metadata/v1/api.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "api",
+  "id": "mspm0g3507.lua-modular",
+  "version": "1.0.6",
+  "firmware": {
+    "name": "MSPM0G3507 modular Lua firmware",
+    "version": "1.0.6",
+    "abi": "mspm0g3507.lua-modular.abi7",
+    "lua_version": "5.5.0",
+    "features": [
+      "serial.hex_upload",
+      "serial.module_update",
+      "external_littlefs",
+      "multi_luac",
+      "fwinfo",
+      "native.gpio",
+      "native.tmr",
+      "native.pwm",
+      "native.adc",
+      "native.i2c",
+      "native.spi",
+      "native.uart",
+      "native.can",
+      "native.dac",
+      "native.crc",
+      "native.comp",
+      "native.rtc",
+      "native.opa"
+    ],
+    "build_id": "f3fda414878caf2a808b9feb689b4829e3ef3202e83f93975b60c502b3cb3cba"
+  },
+  "compatibility": {
+    "chip_ids": [
+      "ti.mspm0g3507.lqfp48",
+      "ti.mspm0g3507.lqfp64"
+    ]
+  },
+  "quality": {
+    "status": "verified",
+    "coverage": "complete",
+    "reviewed_by": "firmware-source-audit",
+    "reviewed_at": "2026-07-27",
+    "notes": "Every modular-core global, native module export, and bundled Lua library is represented. Lua base-language builtins remain language metadata, not firmware extensions."
+  },
+  "types": [
+    {
+      "id": "pin",
+      "kind": "alias",
+      "lua_type": "string",
+      "base": "string",
+      "description": "PA0..PA31 or PB0..PB27, filtered by Chip and Board metadata."
+    }
+  ],
+  "enums": [],
+  "globals": [
+    {
+      "name": "print",
+      "description": "lua.print",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [
+            {
+              "name": "values",
+              "type": "any",
+              "variadic": true
+            }
+          ],
+          "returns": []
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.print",
+        "mspm0.blocking": true,
+        "mspm0.errors": [
+          "argument"
+        ]
+      }
+    },
+    {
+      "name": "delay_ms",
+      "description": "lua.delay_ms",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [
+            {
+              "name": "milliseconds",
+              "type": "integer",
+              "value_constraints": {
+                "minimum": 0,
+                "maximum": 2147483647
+              }
+            }
+          ],
+          "returns": []
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.delay_ms",
+        "mspm0.blocking": true,
+        "mspm0.errors": [
+          "STOP"
+        ]
+      }
+    },
+    {
+      "name": "millis",
+      "description": "lua.millis",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [],
+          "returns": [
+            {
+              "type": "integer",
+              "name": "milliseconds"
+            }
+          ]
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.millis",
+        "mspm0.blocking": false,
+        "mspm0.errors": [
+          "argument"
+        ]
+      }
+    },
+    {
+      "name": "yield",
+      "description": "lua.yield",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [],
+          "returns": []
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.yield",
+        "mspm0.blocking": true,
+        "mspm0.errors": [
+          "STOP"
+        ]
+      }
+    },
+    {
+      "name": "stopped",
+      "description": "lua.stopped",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.stopped",
+        "mspm0.blocking": false,
+        "mspm0.errors": [
+          "argument"
+        ]
+      }
+    },
+    {
+      "name": "byte",
+      "description": "lua.byte",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [
+            {
+              "name": "data",
+              "type": "string",
+              "value_constraints": {
+                "max_length": 4096
+              }
+            },
+            {
+              "name": "index",
+              "type": "integer",
+              "optional": true,
+              "default": 1,
+              "value_constraints": {
+                "minimum": 1,
+                "maximum": 4096
+              }
+            }
+          ],
+          "returns": [
+            {
+              "type": "integer",
+              "name": "value"
+            }
+          ]
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.byte",
+        "mspm0.blocking": false,
+        "mspm0.errors": [
+          "argument"
+        ]
+      }
+    },
+    {
+      "name": "runfile",
+      "description": "lua.runfile",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [
+            {
+              "name": "name",
+              "type": "string",
+              "value_constraints": {
+                "max_length": 28
+              }
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ]
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.runfile",
+        "mspm0.blocking": true,
+        "mspm0.errors": [
+          "file name",
+          "bytecode only",
+          "file open",
+          "file read"
+        ]
+      }
+    },
+    {
+      "name": "require",
+      "description": "lua.require",
+      "overloads": [
+        {
+          "id": "default",
+          "params": [
+            {
+              "name": "name",
+              "type": "string",
+              "value_constraints": {
+                "max_length": 28
+              }
+            }
+          ],
+          "returns": [
+            {
+              "type": "any",
+              "name": "module"
+            }
+          ]
+        }
+      ],
+      "extensions": {
+        "mspm0.symbol_id": "lua.require",
+        "mspm0.blocking": true,
+        "mspm0.errors": [
+          "module name",
+          "file open",
+          "file read",
+          "module runtime error"
+        ]
+      }
+    }
+  ],
+  "modules": [
+    {
+      "name": "iq",
+      "description": "Resident Q16.16 fixed-point math",
+      "functions": [
+        {
+          "name": "from",
+          "description": "lua.iq.from",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "integer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.from",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "from_x10",
+          "description": "lua.iq.from_x10",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "value_x10",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.from_x10",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "from_x100",
+          "description": "lua.iq.from_x100",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "value_x100",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.from_x100",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "to_x10",
+          "description": "lua.iq.to_x10",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "iq16",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.to_x10",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "to_x100",
+          "description": "lua.iq.to_x100",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "iq16",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.to_x100",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "to_x1000",
+          "description": "lua.iq.to_x1000",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "iq16",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.to_x1000",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "mul",
+          "description": "lua.iq.mul",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "a",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                },
+                {
+                  "name": "b",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.mul",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "div",
+          "description": "lua.iq.div",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "a",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                },
+                {
+                  "name": "b",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.div",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "sin_deg",
+          "description": "lua.iq.sin_deg",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "degrees_x10",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.sin_deg",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "cos_deg",
+          "description": "lua.iq.cos_deg",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "degrees_x10",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "iq16"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.cos_deg",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "atan2_deg",
+          "description": "lua.iq.atan2_deg",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "y",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                },
+                {
+                  "name": "x",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "degrees_x10"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.iq.atan2_deg",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "extensions": {
+        "mspm0.core_resident": true
+      }
+    },
+    {
+      "name": "event",
+      "description": "Compiler-injected timer callback dispatcher",
+      "functions": [
+        {
+          "name": "run",
+          "description": "lua.event.run",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.event.run",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "STOP",
+              "callback error"
+            ]
+          }
+        },
+        {
+          "name": "poll",
+          "description": "lua.event.poll",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "callbacks_dispatched"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.event.poll",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "callback error"
+            ]
+          }
+        },
+        {
+          "name": "stop",
+          "description": "lua.event.stop",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.event.stop",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "extensions": {
+        "mspm0.compiler_injected": {
+          "runtime": "timer_event_dispatcher",
+          "required_native_modules": [
+            "tmr"
+          ],
+          "trigger_symbols": [
+            "tmr.every",
+            "event.run",
+            "event.poll",
+            "event.stop"
+          ]
+        }
+      }
+    },
+    {
+      "name": "oled",
+      "description": "Bundled SSD1306 OLED Lua library",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.oled.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "scl pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SCL"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sda",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sda pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SDA"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 8,
+                    "maximum": 119
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.oled.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "oled:i2c_id",
+              "oled:pins",
+              "oled:address",
+              "oled:hz",
+              "oled:i2c_route",
+              "oled:i2c_write"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.oled.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.oled.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "fill",
+          "description": "lua.oled.fill",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "value",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 255,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 255
+                  }
+                }
+              ],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.oled.fill",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "clear",
+          "description": "lua.oled.clear",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.oled.clear",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "text",
+          "description": "lua.oled.text",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "x",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 127
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 63
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": "string"
+                },
+                {
+                  "name": "size",
+                  "type": "integer",
+                  "value_constraints": {
+                    "allowed_values": [
+                      16
+                    ]
+                  }
+                }
+              ],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.oled.text",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "oled:position",
+              "oled:text_bounds",
+              "oled:text_not_rasterized"
+            ]
+          }
+        },
+        {
+          "name": "number",
+          "description": "lua.oled.number",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "x",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 127
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 63
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": "integer"
+                },
+                {
+                  "name": "decimals",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "size",
+                  "type": "integer",
+                  "value_constraints": {
+                    "allowed_values": [
+                      16
+                    ]
+                  }
+                }
+              ],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.oled.number",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "oled:number",
+              "oled:position",
+              "oled:text_bounds"
+            ]
+          }
+        }
+      ],
+      "extensions": {
+        "mspm0.lua_library": {
+          "files": [
+            "oled.lua",
+            "_oled_font.lua"
+          ],
+          "uploaded_with_project": true
+        }
+      }
+    },
+    {
+      "name": "gpio",
+      "description": "GPIO and pin mux",
+      "functions": [
+        {
+          "name": "mode",
+          "description": "lua.gpio.mode",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                },
+                {
+                  "name": "mode",
+                  "type": "string",
+                  "optional": true,
+                  "default": "in",
+                  "value_constraints": {
+                    "allowed_values": [
+                      "out",
+                      "od",
+                      "analog",
+                      "in",
+                      "in_pu",
+                      "in_pd"
+                    ]
+                  }
+                },
+                {
+                  "name": "option",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "feature",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 7
+                  }
+                },
+                {
+                  "name": "invert",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "pin",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.mode",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "gpio:pin",
+              "gpio:busy",
+              "gpio:mode"
+            ]
+          }
+        },
+        {
+          "name": "set",
+          "description": "lua.gpio.set",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              ],
+              "returns": [],
+              "effects": [
+                {
+                  "kind": "write",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.set",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "gpio:pin",
+              "gpio:owner"
+            ]
+          },
+          "aliases": [
+            "write"
+          ]
+        },
+        {
+          "name": "od_write",
+          "description": "lua.gpio.od_write",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                },
+                {
+                  "name": "release",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              ],
+              "returns": [],
+              "effects": [
+                {
+                  "kind": "write",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.od_write",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "get",
+          "description": "lua.gpio.get",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "level"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "read",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.get",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          },
+          "aliases": [
+            "read"
+          ]
+        },
+        {
+          "name": "toggle",
+          "description": "lua.gpio.toggle",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                }
+              ],
+              "returns": [],
+              "effects": [
+                {
+                  "kind": "write",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.toggle",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "af",
+          "description": "lua.gpio.af",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                },
+                {
+                  "name": "pf",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 9
+                  }
+                },
+                {
+                  "name": "input_enable",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "pin",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.af",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "gpio:pin",
+              "gpio:busy",
+              "gpio:pf"
+            ]
+          }
+        },
+        {
+          "name": "release",
+          "description": "lua.gpio.release",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                }
+              ],
+              "returns": [],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.release",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "description": "lua.gpio.owner",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "owner"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.owner",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "policy",
+          "description": "lua.gpio.policy",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "policy_bits"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.policy",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "valid",
+          "description": "lua.gpio.valid",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "string"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.gpio.valid",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.gpio"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "gpio",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "GPIOA",
+            "GPIOB",
+            "IOMUX"
+          ]
+        }
+      }
+    },
+    {
+      "name": "tmr",
+      "description": "Timers and capture",
+      "functions": [
+        {
+          "name": "start",
+          "description": "lua.tmr.start",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "period_ms",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.start",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "every",
+          "description": "lua.tmr.every",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "period_ms",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 2147483647
+                  }
+                },
+                {
+                  "name": "callback",
+                  "type": "function",
+                  "optional": true
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "id"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.every",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "tmr:period",
+              "tmr:full"
+            ]
+          }
+        },
+        {
+          "name": "ready",
+          "description": "lua.tmr.ready",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "read",
+                  "target": "id",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.ready",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "take",
+          "description": "lua.tmr.take",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "hits"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "read",
+                  "target": "id",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.take",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "stop",
+          "description": "lua.tmr.stop",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "id",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.stop",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "millis",
+          "description": "lua.tmr.millis",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "milliseconds"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.millis",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "delay",
+          "description": "lua.tmr.delay",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "milliseconds",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 2147483647
+                  }
+                }
+              ],
+              "returns": []
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.delay",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "STOP"
+            ]
+          }
+        },
+        {
+          "name": "hw_start",
+          "description": "lua.tmr.hw_start",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "ticks",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 4294967295
+                  }
+                },
+                {
+                  "name": "prescale",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 255
+                  }
+                },
+                {
+                  "name": "periodic",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": true
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "timer",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.hw_start",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "tmr:id",
+              "tmr:busy",
+              "tmr:range"
+            ]
+          }
+        },
+        {
+          "name": "hw_value",
+          "description": "lua.tmr.hw_value",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.hw_value",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "hw_ready",
+          "description": "lua.tmr.hw_ready",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.hw_ready",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "hw_stop",
+          "description": "lua.tmr.hw_stop",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "timer",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.hw_stop",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "capture_open",
+          "description": "lua.tmr.capture_open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "timer"
+                    }
+                  }
+                },
+                {
+                  "name": "edge",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 2
+                  }
+                },
+                {
+                  "name": "prescale",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 255
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "handle"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "timer",
+                  "lifetime": "handle",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "pin",
+                  "lifetime": "handle",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.capture_open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "capture_ready",
+          "description": "lua.tmr.capture_ready",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "handle",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.capture_ready",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "capture_read",
+          "description": "lua.tmr.capture_read",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "handle",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "ticks"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.capture_read",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "capture_close",
+          "description": "lua.tmr.capture_close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "handle",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "timer"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "handle",
+                  "lifetime": "call"
+                },
+                {
+                  "kind": "release",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.capture_close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "route",
+          "description": "lua.tmr.route",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "timer"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "channel"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.tmr.route",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.tmr"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "tmr",
+          "minimum_version": "1.0.1",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "TIMA0",
+            "TIMA1",
+            "TIMG0",
+            "TIMG6",
+            "TIMG7",
+            "TIMG8",
+            "TIMG12",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "pwm",
+      "description": "PWM",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.pwm.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 1000,
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 1000000
+                  }
+                },
+                {
+                  "name": "duty",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 50,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                {
+                  "name": "center",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                },
+                {
+                  "name": "invert",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "handle"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "pin",
+                  "lifetime": "handle",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "timer",
+                  "lifetime": "handle",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.pwm.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "open_on",
+          "description": "lua.pwm.open_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 1000000
+                  }
+                },
+                {
+                  "name": "duty",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 50,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                {
+                  "name": "center",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                },
+                {
+                  "name": "invert",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "handle"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "pin",
+                  "lifetime": "handle",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "timer",
+                  "lifetime": "handle",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.pwm.open_on",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "duty",
+          "description": "lua.pwm.duty",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "handle",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "percent",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "write",
+                  "target": "handle",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.pwm.duty",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.pwm.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "handle",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "handle",
+                  "lifetime": "call"
+                },
+                {
+                  "kind": "release",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.pwm.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "open_pair",
+          "description": "lua.pwm.open_pair",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                {
+                  "name": "high_pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "high_pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                },
+                {
+                  "name": "low_pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "low_pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 1000000
+                  }
+                },
+                {
+                  "name": "duty",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 50,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                {
+                  "name": "dead_ns",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1000000
+                  }
+                },
+                {
+                  "name": "center",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "handle"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "timer",
+                  "lifetime": "handle",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "high_pin",
+                  "lifetime": "handle",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "low_pin",
+                  "lifetime": "handle",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.pwm.open_pair",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "close_pair",
+          "description": "lua.pwm.close_pair",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "handle",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                {
+                  "name": "high_pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "high_pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                },
+                {
+                  "name": "low_pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "low_pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "handle",
+                  "lifetime": "call"
+                },
+                {
+                  "kind": "release",
+                  "target": "high_pin",
+                  "lifetime": "call"
+                },
+                {
+                  "kind": "release",
+                  "target": "low_pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.pwm.close_pair",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "route",
+          "description": "lua.pwm.route",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timer",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "pwm"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "channel"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.pwm.route",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.pwm"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "pwm",
+          "minimum_version": "1.0.1",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "TIMA0",
+            "TIMA1",
+            "TIMG6",
+            "TIMG7",
+            "TIMG8",
+            "TIMG12",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "adc",
+      "description": "ADC",
+      "functions": [
+        {
+          "name": "channel",
+          "description": "lua.adc.channel",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "adc"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "channel"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.adc.channel",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "instance",
+          "description": "lua.adc.instance",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "adc"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "adc_id"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.adc.instance",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "read",
+          "description": "lua.adc.read",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "adc"
+                    }
+                  }
+                },
+                {
+                  "name": "sample_cycles",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 32,
+                  "value_constraints": {
+                    "minimum": 4,
+                    "maximum": 1024
+                  }
+                },
+                {
+                  "name": "averages",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 1,
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 128,
+                    "allowed_values": [
+                      1,
+                      2,
+                      4,
+                      8,
+                      16,
+                      32,
+                      64,
+                      128
+                    ]
+                  }
+                },
+                {
+                  "name": "bits",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 12,
+                  "value_constraints": {
+                    "allowed_values": [
+                      8,
+                      10,
+                      12
+                    ]
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "code"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "pin",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "adc",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.adc.read",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "adc:pin",
+              "adc:busy",
+              "adc:timeout"
+            ]
+          }
+        },
+        {
+          "name": "read_mv",
+          "description": "lua.adc.read_mv",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "adc"
+                    }
+                  }
+                },
+                {
+                  "name": "vdda_mv",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 10000
+                  }
+                },
+                {
+                  "name": "sample_cycles",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 32,
+                  "value_constraints": {
+                    "minimum": 4,
+                    "maximum": 1024
+                  }
+                },
+                {
+                  "name": "averages",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 1,
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 128,
+                    "allowed_values": [
+                      1,
+                      2,
+                      4,
+                      8,
+                      16,
+                      32,
+                      64,
+                      128
+                    ]
+                  }
+                },
+                {
+                  "name": "bits",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 12,
+                  "value_constraints": {
+                    "allowed_values": [
+                      8,
+                      10,
+                      12
+                    ]
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "millivolts"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "pin",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "adc",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.adc.read_mv",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "release",
+          "description": "lua.adc.release",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "adc"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "pin",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.adc.release",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.adc"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "adc",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "ADC0",
+            "ADC1",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "i2c",
+      "description": "I2C",
+      "functions": [
+        {
+          "name": "write",
+          "description": "lua.i2c.write",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1023
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 4095
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100000,
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.write",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "i2c:pin",
+              "i2c:busy",
+              "i2c:timeout",
+              "i2c:nack"
+            ]
+          }
+        },
+        {
+          "name": "read",
+          "description": "lua.i2c.read",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1023
+                  }
+                },
+                {
+                  "name": "count",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 256
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100000,
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.read",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "write_read",
+          "description": "lua.i2c.write_read",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 127
+                  }
+                },
+                {
+                  "name": "write_data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 4095
+                  }
+                },
+                {
+                  "name": "read_count",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 256
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100000,
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.write_read",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "write_on",
+          "description": "lua.i2c.write_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "scl pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SCL"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sda",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sda pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SDA"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1023
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 4095
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100000,
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "scl",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "sda",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.write_on",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "read_on",
+          "description": "lua.i2c.read_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "scl pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SCL"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sda",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sda pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SDA"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1023
+                  }
+                },
+                {
+                  "name": "count",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 256
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100000,
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "scl",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "sda",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.read_on",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "write_read_on",
+          "description": "lua.i2c.write_read_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "scl pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SCL"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sda",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sda pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SDA"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 127
+                  }
+                },
+                {
+                  "name": "write_data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 4095
+                  }
+                },
+                {
+                  "name": "read_count",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 256
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100000,
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "scl",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "sda",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.write_read_on",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "probe_on",
+          "description": "lua.i2c.probe_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "scl pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SCL"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sda",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sda pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SDA"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "address",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1023
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100000,
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "scl",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "sda",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.probe_on",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "recover",
+          "description": "lua.i2c.recover",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "scl pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SCL"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sda",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sda pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SDA"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "scl",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "sda",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.recover",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "valid",
+          "description": "lua.i2c.valid",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "string"
+                },
+                {
+                  "name": "sda",
+                  "type": "string"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.valid",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "bytes",
+          "description": "lua.i2c.bytes",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "values",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "variadic": true
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.i2c.bytes",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "i2c:byte"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.i2c"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "i2c",
+          "minimum_version": "1.0.2",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "I2C0",
+            "I2C1",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "spi",
+      "description": "SPI",
+      "functions": [
+        {
+          "name": "xfer",
+          "description": "lua.spi.xfer",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "cs",
+                  "type": "pin",
+                  "optional": true,
+                  "default": "PA18",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "cs pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 512
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 1000000,
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 20000000
+                  }
+                },
+                {
+                  "name": "mode",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "lsb_first",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.spi.xfer",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "spi:size",
+              "spi:config",
+              "spi:timeout"
+            ]
+          }
+        },
+        {
+          "name": "xfer_on",
+          "description": "lua.spi.xfer_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "spi"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sck",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sck pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "spi",
+                      "signal": "SCK"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "pico",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pico pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "spi",
+                      "signal": "PICO"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "poci",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "poci pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "spi",
+                      "signal": "POCI"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "cs",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "cs pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 512
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 1000000,
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 20000000
+                  }
+                },
+                {
+                  "name": "mode",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "lsb_first",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "sck",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "pico",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "poci",
+                  "lifetime": "call",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "cs",
+                  "lifetime": "call",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.spi.xfer_on",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "spi:size",
+              "spi:config",
+              "spi:timeout"
+            ]
+          }
+        },
+        {
+          "name": "read_on",
+          "description": "lua.spi.read_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "spi"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "sck",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "sck pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "spi",
+                      "signal": "SCK"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "pico",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "pico pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "spi",
+                      "signal": "PICO"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "poci",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "poci pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "spi",
+                      "signal": "POCI"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "cs",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "cs pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "gpio"
+                    }
+                  }
+                },
+                {
+                  "name": "count",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 512
+                  }
+                },
+                {
+                  "name": "fill",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 255,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 255
+                  }
+                },
+                {
+                  "name": "hz",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 1000000,
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 20000000
+                  }
+                },
+                {
+                  "name": "mode",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "lsb_first",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.spi.read_on",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "spi:size",
+              "spi:config",
+              "spi:timeout"
+            ]
+          }
+        },
+        {
+          "name": "valid",
+          "description": "lua.spi.valid",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                {
+                  "name": "sck",
+                  "type": "string"
+                },
+                {
+                  "name": "pico",
+                  "type": "string"
+                },
+                {
+                  "name": "poci",
+                  "type": "string"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.spi.valid",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "bytes",
+          "description": "lua.spi.bytes",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "values",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "variadic": true
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.spi.bytes",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "spi:byte"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.spi"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "spi",
+          "minimum_version": "1.0.1",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "SPI0",
+            "SPI1",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "uart",
+      "description": "UART",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.uart.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "uart"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "tx",
+                  "type": "pin",
+                  "optional": true,
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "tx pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "uart",
+                      "signal": "TX"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "rx",
+                  "type": "pin",
+                  "optional": true,
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "rx pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "uart",
+                      "signal": "RX"
+                    },
+                    "bindings": {
+                      "peripheral": "bus"
+                    }
+                  }
+                },
+                {
+                  "name": "baud",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 115200,
+                  "value_constraints": {
+                    "minimum": 300,
+                    "maximum": 4000000
+                  }
+                },
+                {
+                  "name": "bits",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 8,
+                  "value_constraints": {
+                    "minimum": 5,
+                    "maximum": 8
+                  }
+                },
+                {
+                  "name": "parity",
+                  "type": "string",
+                  "optional": true,
+                  "default": "none",
+                  "value_constraints": {
+                    "allowed_values": [
+                      "none",
+                      "even",
+                      "odd"
+                    ]
+                  }
+                },
+                {
+                  "name": "stop",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 1,
+                  "value_constraints": {
+                    "allowed_values": [
+                      1,
+                      2
+                    ]
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "tx",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "rx",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.uart.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "uart:id",
+              "uart:pin",
+              "uart:busy",
+              "uart:format"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.uart.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "id",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.uart.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "tx",
+          "description": "lua.uart.tx",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 4096
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "bytes_written"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.uart.tx",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "rx",
+          "description": "lua.uart.rx",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "timeout_ms",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 60000
+                  }
+                },
+                {
+                  "name": "max_bytes",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 256,
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 4096
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "string",
+                  "name": "data"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.uart.rx",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "valid",
+          "description": "lua.uart.valid",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "tx",
+                  "type": "string"
+                },
+                {
+                  "name": "rx",
+                  "type": "string"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.uart.valid",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.uart"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "uart",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "UART0",
+            "UART1",
+            "UART2",
+            "UART3",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "can",
+      "description": "MCAN",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.can.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "bitrate",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 500000,
+                  "value_constraints": {
+                    "allowed_values": [
+                      125000,
+                      250000,
+                      500000,
+                      1000000
+                    ]
+                  }
+                },
+                {
+                  "name": "loopback",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                },
+                {
+                  "name": "tx",
+                  "type": "pin",
+                  "optional": true,
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "tx pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "can",
+                      "signal": "TX"
+                    },
+                    "bindings": {
+                      "peripheral": "can"
+                    }
+                  }
+                },
+                {
+                  "name": "rx",
+                  "type": "pin",
+                  "optional": true,
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "rx pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "can",
+                      "signal": "RX"
+                    },
+                    "bindings": {
+                      "peripheral": "can"
+                    }
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "can",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "tx",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "rx",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.can.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "open_on",
+          "description": "lua.can.open_on",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "tx",
+                  "type": "pin",
+                  "optional": true,
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "tx pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "can",
+                      "signal": "TX"
+                    },
+                    "bindings": {
+                      "peripheral": "can"
+                    }
+                  }
+                },
+                {
+                  "name": "rx",
+                  "type": "pin",
+                  "optional": true,
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "rx pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "can",
+                      "signal": "RX"
+                    },
+                    "bindings": {
+                      "peripheral": "can"
+                    }
+                  }
+                },
+                {
+                  "name": "bitrate",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 500000,
+                  "value_constraints": {
+                    "allowed_values": [
+                      125000,
+                      250000,
+                      500000,
+                      1000000
+                    ]
+                  }
+                },
+                {
+                  "name": "loopback",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.can.open_on",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.can.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "can",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.can.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "send",
+          "description": "lua.can.send",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 536870911
+                  }
+                },
+                {
+                  "name": "data",
+                  "type": "string",
+                  "value_constraints": {
+                    "max_length": 8
+                  }
+                },
+                {
+                  "name": "timeout_ms",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 100,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 60000
+                  }
+                },
+                {
+                  "name": "extended",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.can.send",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "recv",
+          "description": "lua.can.recv",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "timeout_ms",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 60000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "id"
+                },
+                {
+                  "type": "string",
+                  "name": "data"
+                },
+                {
+                  "type": "boolean",
+                  "name": "extended"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.can.recv",
+            "mspm0.blocking": true,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "valid",
+          "description": "lua.can.valid",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "tx",
+                  "type": "string"
+                },
+                {
+                  "name": "rx",
+                  "type": "string"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.can.valid",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.can"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "can",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "MCAN0",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "dac",
+      "description": "DAC",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.dac.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "bits",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 12,
+                  "value_constraints": {
+                    "allowed_values": [
+                      8,
+                      12
+                    ]
+                  }
+                },
+                {
+                  "name": "reference",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "external_pin_enable",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": true
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "dac",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "PA15",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.dac.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "write",
+          "description": "lua.dac.write",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "code",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 4095
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "write",
+                  "target": "dac",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.dac.write",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "write_mv",
+          "description": "lua.dac.write_mv",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "millivolts",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 10000
+                  }
+                },
+                {
+                  "name": "reference_mv",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 10000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "code"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "write",
+                  "target": "dac",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.dac.write_mv",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.dac.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "dac",
+                  "lifetime": "call"
+                },
+                {
+                  "kind": "release",
+                  "target": "PA15",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.dac.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.dac"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "dac",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "DAC0",
+            "PA15"
+          ]
+        }
+      }
+    },
+    {
+      "name": "crc",
+      "description": "CRC",
+      "functions": [
+        {
+          "name": "crc16",
+          "description": "lua.crc.crc16",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "data",
+                  "type": "string"
+                },
+                {
+                  "name": "initial",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 65535,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 65535
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.crc.crc16",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "crc32",
+          "description": "lua.crc.crc32",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "data",
+                  "type": "string"
+                },
+                {
+                  "name": "initial",
+                  "type": "integer",
+                  "optional": true,
+                  "default": -1
+                }
+              ],
+              "returns": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.crc.crc32",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.crc"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "crc",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": []
+        }
+      }
+    },
+    {
+      "name": "comp",
+      "description": "Comparator",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.comp.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 2
+                  }
+                },
+                {
+                  "name": "positive_pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "positive_pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "comp"
+                    }
+                  }
+                },
+                {
+                  "name": "negative_pin",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "double",
+                    "placeholder": "negative_pin pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "comp"
+                    }
+                  }
+                },
+                {
+                  "name": "fast",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                },
+                {
+                  "name": "hysteresis",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "invert",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "positive_pin",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                },
+                {
+                  "kind": "claim",
+                  "target": "negative_pin",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.comp.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "read",
+          "description": "lua.comp.read",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 2
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.comp.read",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.comp.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 2
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "id",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.comp.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.comp"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "comp",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "COMP0",
+            "COMP1",
+            "COMP2",
+            "pins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "rtc",
+      "description": "RTC",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.rtc.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "rtc",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.rtc.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "set",
+          "description": "lua.rtc.set",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "year",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 4095
+                  }
+                },
+                {
+                  "name": "month",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 12
+                  }
+                },
+                {
+                  "name": "day",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 1,
+                    "maximum": 31
+                  }
+                },
+                {
+                  "name": "weekday",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 6
+                  }
+                },
+                {
+                  "name": "hour",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 23
+                  }
+                },
+                {
+                  "name": "minute",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 59
+                  }
+                },
+                {
+                  "name": "second",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 59
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.rtc.set",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "get",
+          "description": "lua.rtc.get",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": [
+                {
+                  "type": "integer",
+                  "name": "year"
+                },
+                {
+                  "type": "integer",
+                  "name": "month"
+                },
+                {
+                  "type": "integer",
+                  "name": "day"
+                },
+                {
+                  "type": "integer",
+                  "name": "weekday"
+                },
+                {
+                  "type": "integer",
+                  "name": "hour"
+                },
+                {
+                  "type": "integer",
+                  "name": "minute"
+                },
+                {
+                  "type": "integer",
+                  "name": "second"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.rtc.get",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.rtc.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "rtc",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.rtc.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.rtc"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "rtc",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "RTC"
+          ]
+        }
+      }
+    },
+    {
+      "name": "opa",
+      "description": "Operational amplifier",
+      "functions": [
+        {
+          "name": "open",
+          "description": "lua.opa.open",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                {
+                  "name": "psel",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 7
+                  }
+                },
+                {
+                  "name": "nsel",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 7
+                  }
+                },
+                {
+                  "name": "msel",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                },
+                {
+                  "name": "gain",
+                  "type": "integer",
+                  "optional": true,
+                  "default": 0,
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 7
+                  }
+                },
+                {
+                  "name": "output",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": true
+                },
+                {
+                  "name": "chop",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                },
+                {
+                  "name": "high_gbw",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": true
+                },
+                {
+                  "name": "rri",
+                  "type": "boolean",
+                  "optional": true,
+                  "default": false
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "id",
+                  "lifetime": "until_release",
+                  "exclusive": true
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.opa.open",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "ready",
+          "description": "lua.opa.ready",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.opa.ready",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        },
+        {
+          "name": "close",
+          "description": "lua.opa.close",
+          "overloads": [
+            {
+              "id": "default",
+              "params": [
+                {
+                  "name": "id",
+                  "type": "integer",
+                  "value_constraints": {
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean"
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "release",
+                  "target": "id",
+                  "lifetime": "call"
+                }
+              ]
+            }
+          ],
+          "extensions": {
+            "mspm0.symbol_id": "lua.opa.close",
+            "mspm0.blocking": false,
+            "mspm0.errors": [
+              "argument"
+            ]
+          }
+        }
+      ],
+      "availability": {
+        "firmware_features_all": [
+          "native.opa"
+        ]
+      },
+      "extensions": {
+        "mspm0.native_module": {
+          "id": "opa",
+          "minimum_version": "1.0.0",
+          "dependencies": [],
+          "conflicts": [],
+          "resources": [
+            "OPA0",
+            "OPA1",
+            "pins"
+          ]
+        }
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "API001",
+      "severity": "error",
+      "message": "API symbol is not present in the selected firmware catalog."
+    },
+    {
+      "code": "MOD001",
+      "severity": "error",
+      "message": "Required native module is not selected."
+    },
+    {
+      "code": "PIN004",
+      "severity": "error",
+      "message": "Pins do not share the requested peripheral route."
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "title": "mspm0_lua modular C binding tables",
+        "revision": "f3fda414878caf2a808b9feb689b4829e3ef3202e83f93975b60c502b3cb3cba"
+      },
+      {
+        "title": "TI MSPM0 SDK DriverLib",
+        "revision": "2.11.00.07"
+      }
+    ],
+    "license": "Project firmware metadata, distributed with the firmware catalog",
+    "generated_by": "tools/build_api_metadata.py"
+  },
+  "extensions": {
+    "mspm0.catalog_sha256": "f3fda414878caf2a808b9feb689b4829e3ef3202e83f93975b60c502b3cb3cba",
+    "mspm0.module_format": 2,
+    "mspm0.nmup_format": 1,
+    "mspm0.runtime_model": {
+      "callback_context": "Lua main context only",
+      "interrupt_context": "ISRs never enter Lua",
+      "native_module_limit": 8,
+      "vm_rebuilt_after_module_update": true
+    }
+  }
+}

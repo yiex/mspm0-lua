@@ -1,0 +1,219 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  firmware:
+    name: Build firmware
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: python -m pip install pyserial
+
+      - name: Download ARM GNU toolchain
+        run: python tools/download_toolchain.py
+
+      - name: Download MSPM0 SDK
+        run: python tools/fetch_sdk_zip.py
+
+      - name: Build native modules
+        env:
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: python tools/build_native_module.py
+
+      - name: Build modular core
+        env:
+          MSPM0_PROFILE: modular
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: python tools/build_fw.py
+
+      - name: Build catalog release
+        env:
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: python tools/build_catalog_release.py
+
+      - name: Build API metadata
+        env:
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: python tools/build_api_metadata.py
+
+      - name: Refresh catalog manifest
+        env:
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: python tools/build_catalog_release.py
+
+      - name: Build protocol fixtures
+        env:
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: python tools/build_protocol_fixtures.py
+
+      - name: Compose core image
+        env:
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: |
+          # Clean reflash base: modular core plus empty function slots.
+          # Individual module images are deployed per slot by the IDE/tools.
+          python tools/compose_firmware.py --modules --output mspm0_lua/build_composed/firmware_core.bin
+
+      - name: Build bytecode profile
+        env:
+          MSPM0_PROFILE: bytecode
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: python tools/build_fw.py
+
+      - name: Run host-side regression tests
+        env:
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        run: |
+          python tools/test_module_catalog.py
+          python tools/test_module_update_bundle.py
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mspm0-lua-firmware
+          path: |
+            mspm0_lua/build_bytecode/*.bin
+            mspm0_lua/build_modular/*.bin
+            mspm0_lua/build_modules/index.json
+            mspm0_lua/build_modules/*/slot*/*.bin
+            mspm0_lua/build_composed/*.bin
+            mspm0_lua/build_composed/*.json
+            mspm0_lua/release/catalog_manifest.json
+            mspm0_lua/release/mspm0-lua.api.json
+            mspm0_lua/release/test-vectors/*
+          if-no-files-found: error
+
+  ide:
+    name: Build IDE release
+    needs: firmware
+    runs-on: windows-latest
+    timeout-minutes: 90
+    env:
+      LLVM_MINGW_VERSION: 20260616
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Rust with gnullvm target
+        shell: pwsh
+        run: |
+          rustup toolchain install stable
+          rustup target add x86_64-pc-windows-gnullvm
+
+      - name: Download LLVM-MinGW
+        shell: pwsh
+        run: |
+          $version = $env:LLVM_MINGW_VERSION
+          $url = "https://github.com/mstorsjo/llvm-mingw/releases/download/$version/llvm-mingw-$version-ucrt-x86_64.zip"
+          $zip = Join-Path $env:RUNNER_TEMP "llvm-mingw.zip"
+          Invoke-WebRequest -Uri $url -OutFile $zip
+          $dest = Join-Path $env:RUNNER_TEMP "llvm-mingw"
+          Expand-Archive -Path $zip -DestinationPath $dest
+          $root = Get-ChildItem $dest -Directory | Select-Object -First 1
+          echo "LLVM_MINGW=$($root.FullName)" >> $env:GITHUB_ENV
+
+      - name: Prepare LLVM-MinGW environment
+        shell: pwsh
+        run: |
+          $root = $env:LLVM_MINGW
+          echo "LLVM_MINGW_LIB=$root\x86_64-w64-mingw32\lib" >> $env:GITHUB_ENV
+          echo "LIBRARY_PATH=$root\x86_64-w64-mingw32\lib" >> $env:GITHUB_ENV
+          echo "$root\bin" >> $env:GITHUB_PATH
+          echo "GPUI_FXC_PATH=$env:GITHUB_WORKSPACE\gpui_ide\tools\fxc\fxc.exe" >> $env:GITHUB_ENV
+
+      - name: Download firmware artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: mspm0-lua-firmware
+
+      - name: Place firmware artifacts under mspm0_lua/
+        shell: pwsh
+        run: |
+          # The artifact layout is the content of mspm0_lua/ at the workspace
+          # root (upload-artifact strips the common prefix).
+          foreach ($d in @('build_bytecode','build_modular','build_modules','build_composed')) {
+            if (Test-Path $d) { Move-Item -Path $d -Destination mspm0_lua\ -Force }
+          }
+          if (Test-Path release) {
+            Copy-Item -Path release\* -Destination mspm0_lua\release\ -Recurse -Force
+          }
+
+      - name: Build and package IDE release
+        shell: pwsh
+        run: |
+          Set-Location gpui_ide
+          powershell -NoProfile -ExecutionPolicy Bypass -File .\build_release.ps1
+          Compress-Archive -Path .\dist\* -DestinationPath ..\Lua_IDE_Windows.zip -Force
+
+      - name: Upload IDE release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lua-ide-windows
+          path: Lua_IDE_Windows.zip
+          if-no-files-found: error
+
+  publish:
+    name: Publish GitHub release
+    needs: [firmware, ide]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download firmware artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: mspm0-lua-firmware
+          path: firmware
+
+      - name: Download IDE release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: lua-ide-windows
+          path: ide
+
+      - name: Package per-slot module binaries
+        run: |
+          cd firmware
+          zip -r ../mspm0-modules.zip build_modules
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            firmware/build_composed/firmware_core.bin
+            firmware/build_composed/firmware_core.json
+            firmware/build_modular/mspm0_lua_modular.bin
+            firmware/build_bytecode/mspm0_lua_bytecode.bin
+            firmware/release/catalog_manifest.json
+            firmware/release/test-vectors/vectors.json
+            mspm0-modules.zip
+            ide/Lua_IDE_Windows.zip
+          generate_release_notes: true

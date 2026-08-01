@@ -1,0 +1,5 @@
+print('HI_IQ_START')
+local a = iq.from_x10(25)
+local b = iq.sin_deg(450)
+print('2.5*sin45 x100', iq.to_x100(iq.mul(a, b)))
+print('HI_IQ_OK')

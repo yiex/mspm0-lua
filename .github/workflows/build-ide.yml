@@ -1,0 +1,90 @@
+name: Build IDE
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gpui_ide/**'
+      - 'mspm0_lua/third_party/lua/**'
+      - '.github/workflows/build-ide.yml'
+  pull_request:
+    paths:
+      - 'gpui_ide/**'
+      - 'mspm0_lua/third_party/lua/**'
+      - '.github/workflows/build-ide.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    env:
+      LLVM_MINGW_VERSION: 20260616
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust with gnullvm target
+        shell: pwsh
+        run: |
+          rustup toolchain install stable
+          rustup target add x86_64-pc-windows-gnullvm
+
+      - name: Download LLVM-MinGW
+        shell: pwsh
+        run: |
+          $version = $env:LLVM_MINGW_VERSION
+          $url = "https://github.com/mstorsjo/llvm-mingw/releases/download/$version/llvm-mingw-$version-ucrt-x86_64.zip"
+          $zip = Join-Path $env:RUNNER_TEMP "llvm-mingw.zip"
+          Invoke-WebRequest -Uri $url -OutFile $zip
+          $dest = Join-Path $env:RUNNER_TEMP "llvm-mingw"
+          Expand-Archive -Path $zip -DestinationPath $dest
+          $root = Get-ChildItem $dest -Directory | Select-Object -First 1
+          echo "LLVM_MINGW=$($root.FullName)" >> $env:GITHUB_ENV
+
+      - name: Prepare LLVM-MinGW environment
+        shell: pwsh
+        run: |
+          $root = $env:LLVM_MINGW
+          echo "LLVM_MINGW_LIB=$root\x86_64-w64-mingw32\lib" >> $env:GITHUB_ENV
+          echo "LIBRARY_PATH=$root\x86_64-w64-mingw32\lib" >> $env:GITHUB_ENV
+          echo "$root\bin" >> $env:GITHUB_PATH
+          echo "GPUI_FXC_PATH=$env:GITHUB_WORKSPACE\gpui_ide\tools\fxc\fxc.exe" >> $env:GITHUB_ENV
+
+      - name: Build IDE (debug)
+        shell: pwsh
+        run: |
+          Set-Location gpui_ide
+          cargo build --target x86_64-pc-windows-gnullvm
+
+      - name: Build firmware artifacts for integration tests
+        env:
+          MSPM0_PROFILE: modular
+          MSPM0_SDK: ${{ github.workspace }}/tools/mspm0-sdk
+          MSPM0_TOOLCHAIN: ${{ github.workspace }}/tools/arm-gnu-toolchain
+        shell: pwsh
+        run: |
+          python tools/download_toolchain.py
+          python tools/fetch_sdk_zip.py
+          python tools/build_native_module.py
+          python tools/build_fw.py
+          python tools/build_catalog_release.py
+          python tools/build_api_metadata.py
+          python tools/build_catalog_release.py
+          python tools/build_protocol_fixtures.py
+
+      - name: Run Rust tests
+        shell: pwsh
+        run: |
+          Set-Location gpui_ide
+          cargo test --target x86_64-pc-windows-gnullvm
+
+      - name: Upload IDE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lua-ide-windows
+          path: gpui_ide/target/x86_64-pc-windows-gnullvm/debug/*.exe
+          if-no-files-found: error

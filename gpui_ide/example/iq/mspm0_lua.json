@@ -1,0 +1,5 @@
+{
+  "name": "IQ16",
+  "target_luac": "main.luac",
+  "main_source": "main.lua"
+}

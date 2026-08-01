@@ -1,0 +1,5 @@
+{
+  "name": "ADC",
+  "target_luac": "main.luac",
+  "main_source": "main.lua"
+}

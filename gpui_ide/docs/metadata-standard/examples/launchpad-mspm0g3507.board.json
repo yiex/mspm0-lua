@@ -1,0 +1,146 @@
+{
+  "$schema": "../schemas/board.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "board",
+  "id": "ti.launchpad-mspm0g3507.rev-a",
+  "version": "0.1.0",
+  "vendor": "Texas Instruments / project-specific assembly",
+  "name": "MSPM0G3507 development board",
+  "revision": "example-rev-a",
+  "display_name": "MSPM0G3507 board (illustrative subset)",
+  "chip_ref": {
+    "id": "ti.mspm0g3507.lqfp48",
+    "version": "^0.1.0"
+  },
+  "compatibility": {
+    "api_ids": ["mspm0.lua-bytecode"],
+    "firmware_abis": ["mspm0.lua-bytecode"]
+  },
+  "features": ["external_littlefs", "serial_script_upload"],
+  "quality": {
+    "status": "draft",
+    "coverage": "example",
+    "notes": "Non-authoritative subset. Connector positions, flash part and flash wiring are deliberately omitted until verified."
+  },
+  "pins": [
+    {
+      "id": "header.pa15",
+      "name": "PA15",
+      "aliases": ["SCL"],
+      "chip_pin": "PA15",
+      "available": true,
+      "preference": 20
+    },
+    {
+      "id": "header.pa16",
+      "name": "PA16",
+      "aliases": ["SDA"],
+      "chip_pin": "PA16",
+      "available": true,
+      "preference": 20
+    },
+    {
+      "id": "usb-uart.pa10",
+      "name": "PA10",
+      "aliases": ["CH340_TX"],
+      "chip_pin": "PA10",
+      "available": false,
+      "notes": "Fixed board connection in the current IDE workflow."
+    },
+    {
+      "id": "usb-uart.pa11",
+      "name": "PA11",
+      "aliases": ["CH340_RX"],
+      "chip_pin": "PA11",
+      "available": false,
+      "notes": "Fixed board connection in the current IDE workflow."
+    },
+    {
+      "id": "header.pa18",
+      "name": "PA18",
+      "chip_pin": "PA18",
+      "available": true,
+      "preference": -50
+    }
+  ],
+  "onboard_devices": [
+    {
+      "id": "ch340",
+      "kind": "usb_uart_bridge",
+      "name": "CH340 serial bridge",
+      "connections": [
+        {
+          "signal": "TX_TO_MCU",
+          "chip_pin": "PA11",
+          "board_pin": "usb-uart.pa11",
+          "exclusive": true,
+          "releasable": false
+        },
+        {
+          "signal": "RX_FROM_MCU",
+          "chip_pin": "PA10",
+          "board_pin": "usb-uart.pa10",
+          "exclusive": true,
+          "releasable": false
+        }
+      ]
+    },
+    {
+      "id": "spi-flash",
+      "kind": "external_flash",
+      "name": "External SPI flash",
+      "connections": [],
+      "notes": "Connection details intentionally omitted from the non-authoritative example."
+    }
+  ],
+  "reserved_pins": [
+    {
+      "chip_pin": "PA18",
+      "reason": "Current IDE diagnostics identify a boot/BSL risk; verify the actual board boot circuit before use.",
+      "severity": "warning",
+      "releasable": true,
+      "applies_to": ["gpio", "i2c"]
+    }
+  ],
+  "memory_devices": [
+    {
+      "id": "script-flash",
+      "kind": "external_spi_nor",
+      "name": "External script flash",
+      "writable": true,
+      "interface": {
+        "kind": "spi",
+        "device": "spi-flash",
+        "notes": "Peripheral and route must be added after schematic verification."
+      },
+      "filesystem": {
+        "kind": "littlefs",
+        "mount_point": "/",
+        "format_on_first_use": true
+      }
+    }
+  ],
+  "artifact_targets": [
+    {
+      "id": "lua-bytecode-default",
+      "kind": "lua_bytecode",
+      "storage": "script-flash",
+      "base_path": "/",
+      "filename_template": "{project}.luac",
+      "runtime_path_template": "/{project}.luac",
+      "upload_strategy": "serial_protocol",
+      "priority": 100,
+      "required_features": ["external_littlefs"]
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "title": "Local IDE BSL/serial implementation and bundled board examples",
+        "revision": "workspace snapshot 2026-07-27"
+      }
+    ],
+    "license": "CC0-1.0 for this illustrative metadata only; board facts require schematic verification",
+    "copyright": "Example metadata structure (c) 2026 project contributors"
+  }
+}

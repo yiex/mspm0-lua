@@ -1,0 +1,6 @@
+si 1
+speed 2000
+device MSPM0G3507
+connect
+mem32 0x00000000 4
+exit

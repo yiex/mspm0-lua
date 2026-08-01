@@ -1,0 +1,43 @@
+# Firmware build outputs
+mspm0_lua/build/
+mspm0_lua/build_bytecode/
+mspm0_lua/build_modular/
+mspm0_lua/build_modules/
+mspm0_lua/build_source_full/
+mspm0_lua/build_composed/
+mspm0_lua/build_examples/
+
+# Toolchain and SDK (downloaded by tools/)
+tools/arm-gnu-toolchain/
+tools/arm-gnu-toolchain-*.zip
+tools/arm-gnu-toolchain-*.tar.xz
+tools/mspm0-sdk/
+tools/mspm0-sdk-main.zip
+tools/mspm0_sdk/
+tools/bin/
+mspm0_lua/third_party/mspm0_sdk/
+
+# Rust (IDE)
+gpui_ide/target/
+gpui_ide/dist/
+tools/serial_probe_rs/target/
+
+# Python
+__pycache__/
+*.pyc
+
+# Lua bytecode and scratch scripts
+*.luac
+!mspm0_lua/release/examples/ide_oled123/*.luac
+mspm0_lua/scripts/_*.lua
+
+# Generated IDE metadata (recreated by gpui_ide/tools/generate_target_metadata.py)
+gpui_ide/metadata/
+
+# IDE state
+.mspm0-run-state.json
+gpui_ide/config.local.json
+
+# OS junk
+Thumbs.db
+.DS_Store

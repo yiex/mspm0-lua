@@ -1,0 +1,271 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mspm0-lua.dev/metadata/v1/chip.schema.json",
+  "title": "MCU chip and pin-mux metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "id",
+    "version",
+    "vendor",
+    "family",
+    "model",
+    "package",
+    "quality",
+    "peripherals",
+    "pins",
+    "provenance"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
+    "schema_version": { "const": "1.0.0" },
+    "kind": { "const": "chip" },
+    "id": { "$ref": "#/$defs/id" },
+    "version": { "$ref": "#/$defs/semver" },
+    "vendor": { "type": "string", "minLength": 1 },
+    "family": { "type": "string", "minLength": 1 },
+    "model": { "type": "string", "minLength": 1 },
+    "display_name": { "type": "string", "minLength": 1 },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "package": { "$ref": "#/$defs/package" },
+    "naming": { "$ref": "#/$defs/naming" },
+    "quality": { "$ref": "#/$defs/quality" },
+    "features": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "uniqueItems": true
+    },
+    "peripherals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/peripheral" }
+    },
+    "pins": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/pin" }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constraint" }
+    },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "extensions": { "$ref": "#/$defs/extensions" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+      "minLength": 1
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(?:\\.[a-z0-9_-]+)+$"
+      },
+      "additionalProperties": true
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "coverage"],
+      "properties": {
+        "status": {
+          "enum": ["draft", "reviewed", "verified", "deprecated"]
+        },
+        "coverage": { "enum": ["example", "partial", "complete"] },
+        "reviewed_by": { "type": "string" },
+        "reviewed_at": { "type": "string", "format": "date" },
+        "notes": { "type": "string" }
+      }
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "pin_count"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "pin_count": { "type": "integer", "minimum": 1 },
+        "body": { "type": "string" },
+        "variant": { "type": "string" }
+      }
+    },
+    "naming": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pin_pattern": { "type": "string", "format": "regex" },
+        "case_sensitive": { "type": "boolean", "default": false },
+        "canonical_case": { "enum": ["upper", "lower", "preserve"] }
+      }
+    },
+    "peripheral": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "class", "instance", "signals"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "class": { "$ref": "#/$defs/id" },
+        "instance": { "type": "integer", "minimum": 0 },
+        "signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "features": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "clock_domain": { "type": "string" },
+        "description": { "type": "string" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "pin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "package_positions", "capabilities"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "package_positions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "power_domain": { "type": "string" },
+        "electrical": { "$ref": "#/$defs/electrical" },
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/capability" }
+        },
+        "notes": { "type": "string" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "electrical": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input": { "type": "boolean" },
+        "output": { "type": "boolean" },
+        "analog": { "type": "boolean" },
+        "open_drain": { "type": "boolean" },
+        "five_volt_tolerant": { "type": "boolean" },
+        "max_source_ma": { "type": "number", "minimum": 0 },
+        "max_sink_ma": { "type": "number", "minimum": 0 },
+        "voltage_min": { "type": "number" },
+        "voltage_max": { "type": "number" }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "function", "class", "mode", "direction"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "function": { "type": "string", "minLength": 1 },
+        "class": { "$ref": "#/$defs/id" },
+        "mode": { "enum": ["gpio", "alternate", "analog", "system"] },
+        "direction": {
+          "enum": ["input", "output", "bidirectional", "analog", "none"]
+        },
+        "peripheral": { "type": "string", "minLength": 1 },
+        "signal": { "type": "string", "minLength": 1 },
+        "route": { "$ref": "#/$defs/id" },
+        "selector": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "attributes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "requires_features": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "notes": { "type": "string" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "severity", "members", "message"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": {
+          "enum": [
+            "mutually_exclusive",
+            "requires_feature",
+            "reserved",
+            "electrical",
+            "package"
+          ]
+        },
+        "severity": { "enum": ["info", "warning", "error"] },
+        "members": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "condition": {
+          "type": "object",
+          "additionalProperties": { "type": ["string", "number", "boolean"] }
+        },
+        "message": { "type": "string", "minLength": 1 },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "license"],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title"],
+            "properties": {
+              "title": { "type": "string", "minLength": 1 },
+              "revision": { "type": "string" },
+              "url": { "type": "string", "format": "uri" },
+              "retrieved_at": { "type": "string", "format": "date" },
+              "sha256": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" }
+            }
+          }
+        },
+        "license": { "type": "string", "minLength": 1 },
+        "copyright": { "type": "string" },
+        "generated_by": { "type": "string" }
+      }
+    }
+  }
+}

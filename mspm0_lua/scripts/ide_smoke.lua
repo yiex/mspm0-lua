@@ -1,0 +1,5 @@
+print("IDE_SMOKE_BEGIN")
+assert(type(gpio) == "table" and type(gpio.valid) == "function")
+assert(type(tmr) == "table" and type(tmr.millis) == "function")
+assert(gpio.valid("PA14"))
+print("IDE_SMOKE_OK", tmr.millis())

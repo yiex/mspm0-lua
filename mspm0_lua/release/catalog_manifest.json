@@ -1,0 +1,581 @@
+{
+  "schema": 1,
+  "firmware_id": "mspm0g3507.lua-modular",
+  "firmware_version": "1.0.6",
+  "target": "MSPM0G3507",
+  "core_abi": 7,
+  "module_format": 2,
+  "nmup_format": 1,
+  "layout": {
+    "abi_version": 7,
+    "core_end": 98047,
+    "core_api": 98048,
+    "slot_base": 98304,
+    "slot_size": 4096,
+    "slot_count": 8,
+    "empty_slots_allowed": true,
+    "vm_rebuild_required": true
+  },
+  "artifacts": {
+    "core": {
+      "path": "build_modular/mspm0_lua_modular.bin",
+      "length": 98184,
+      "sha256": "a310e71820db711189403107ff8a57df203fa51a9a30d53c73f14e98e7d36db7"
+    },
+    "modules": {
+      "path": "modules/modules.json",
+      "length": 4131,
+      "sha256": "cf1c317d2954de76866866de5e93cbec0bf31e118357aaa6ca80c42a88cbf851"
+    },
+    "index": {
+      "path": "build_modules/index.json",
+      "length": 62186,
+      "sha256": "f36635a20099d01062e1b07f5ad1221b0ca2da4e1af7b432046e07cf60c77fa6"
+    },
+    "api": {
+      "path": "release/mspm0-lua.api.json",
+      "length": 168457,
+      "sha256": "34499c37fc0f397a89f841b5126742329bb97dd0ba8578402e645a37f7a40c23"
+    }
+  },
+  "catalog_sha256": "f3fda414878caf2a808b9feb689b4829e3ef3202e83f93975b60c502b3cb3cba",
+  "catalog_hash_algorithm": {
+    "name": "sha256-path-length-content-v1",
+    "ordering": "ascending UTF-8 relative POSIX path bytes",
+    "record": "utf8(path) || NUL || ascii(decimal_length) || NUL || lowercase_sha256 || LF",
+    "digest": "SHA-256 of the concatenated records",
+    "file_count": 106
+  },
+  "catalog_files": [
+    {
+      "path": "build_modules/adc/slot0/adc.bin",
+      "length": 1656,
+      "sha256": "258300be334bd89cbd9d7dcd8d1119c205dbd9c630153c5b5d1a5b99aeea29af"
+    },
+    {
+      "path": "build_modules/adc/slot1/adc.bin",
+      "length": 1656,
+      "sha256": "036f1227084d6838b8debfc3d0b8cf83739144a77b27295fb8bd83fab228021d"
+    },
+    {
+      "path": "build_modules/adc/slot2/adc.bin",
+      "length": 1656,
+      "sha256": "0cdc4510dec3f8f99a79b893850beeb39510a0d512fecace62f88e867b78e345"
+    },
+    {
+      "path": "build_modules/adc/slot3/adc.bin",
+      "length": 1656,
+      "sha256": "34db997a5d0d287310ca4c1d758f0f56f1f5375e1efb4111e59bc7f189af032f"
+    },
+    {
+      "path": "build_modules/adc/slot4/adc.bin",
+      "length": 1656,
+      "sha256": "0fd509d9983a024a4812a89f1b287d503fff7341c5c6eae63a6ee1ca1094dfc6"
+    },
+    {
+      "path": "build_modules/adc/slot5/adc.bin",
+      "length": 1656,
+      "sha256": "62123d2aaddb8c8047ccf7e92300316cc7c4ed383e8ebda05bd810ff05c286ec"
+    },
+    {
+      "path": "build_modules/adc/slot6/adc.bin",
+      "length": 1656,
+      "sha256": "12a9a188c6f08f948725d021bedc1375ae55d352ae819d73a41bd155499ecf27"
+    },
+    {
+      "path": "build_modules/adc/slot7/adc.bin",
+      "length": 1656,
+      "sha256": "88d92419dfd80bec60b40fed14f0a7c9e76992eea05495d6d9d24ae29d1965d5"
+    },
+    {
+      "path": "build_modules/can/slot0/can.bin",
+      "length": 2628,
+      "sha256": "1c56171684ff958b052bc5d01b1067affe00a2f1faffbf3dbc0436d1083cc047"
+    },
+    {
+      "path": "build_modules/can/slot1/can.bin",
+      "length": 2628,
+      "sha256": "394cf159bad6b6f83d5b33394fd39aace80dd6b49e1acff55d26217028ad93a0"
+    },
+    {
+      "path": "build_modules/can/slot2/can.bin",
+      "length": 2628,
+      "sha256": "f23994d8a2b45e2c337f6dfbdd79710b5ed5af5202a575e28de616e11819ac9d"
+    },
+    {
+      "path": "build_modules/can/slot3/can.bin",
+      "length": 2628,
+      "sha256": "76547e033343d79b8a393109d534a42bbb5907ed4e168bd46647acce472e4735"
+    },
+    {
+      "path": "build_modules/can/slot4/can.bin",
+      "length": 2628,
+      "sha256": "9f7aac82043cce54d4df5874aa755e50db53ae2febdcc160688d11113a29cd97"
+    },
+    {
+      "path": "build_modules/can/slot5/can.bin",
+      "length": 2628,
+      "sha256": "46aacc2ef901f8644b9e60d9d6c655c947b3037b3e8c666e93f952f7539c386c"
+    },
+    {
+      "path": "build_modules/can/slot6/can.bin",
+      "length": 2628,
+      "sha256": "66bca8186330dda232586ece0036ec729b7dffda9f3208fd2905f020461d3994"
+    },
+    {
+      "path": "build_modules/can/slot7/can.bin",
+      "length": 2628,
+      "sha256": "2bb97526845ecd13d072ad44779d827ecf428e6b0827ddc277da04265e5c7d09"
+    },
+    {
+      "path": "build_modules/comp/slot0/comp.bin",
+      "length": 1440,
+      "sha256": "ee6ef61ce2671601736710f1b9f9439bf383ff3a690795bdd250ca7a5d3fc891"
+    },
+    {
+      "path": "build_modules/comp/slot1/comp.bin",
+      "length": 1440,
+      "sha256": "6f7b8c38e0df745f6234b683fd6043cc158e4b5a6e8355913cf0dfb2737d6ba6"
+    },
+    {
+      "path": "build_modules/comp/slot2/comp.bin",
+      "length": 1440,
+      "sha256": "cbf6ee8d0d787a32532470dba769cc617cfb7d59f4929ed5d60e3a439321afca"
+    },
+    {
+      "path": "build_modules/comp/slot3/comp.bin",
+      "length": 1440,
+      "sha256": "15958caa94d355370c8be639f5eb8474b2da3f496d5bfa0c0e0bc56be818bbdf"
+    },
+    {
+      "path": "build_modules/comp/slot4/comp.bin",
+      "length": 1440,
+      "sha256": "90461b12f9d5266e64b7ccf2c275d11906a35a822471a3f9964a905703491876"
+    },
+    {
+      "path": "build_modules/comp/slot5/comp.bin",
+      "length": 1440,
+      "sha256": "06e611beaf8e35045f002af56bacd225982ec7e6dee5f8cf3fd30a5857abf939"
+    },
+    {
+      "path": "build_modules/comp/slot6/comp.bin",
+      "length": 1440,
+      "sha256": "acc96ae65c100b5f58feff9c61cfa0975ca93c61d5803c5d52a4f087bea22bef"
+    },
+    {
+      "path": "build_modules/comp/slot7/comp.bin",
+      "length": 1440,
+      "sha256": "4915d6e9cac387e663de50caa84fee47e95812ed08d047f4e8f96d56525482ed"
+    },
+    {
+      "path": "build_modules/crc/slot0/crc.bin",
+      "length": 332,
+      "sha256": "d6f1ec63ddc299e673428ade6cfe45563ba29a946b3dd825a25807ac32dffbf6"
+    },
+    {
+      "path": "build_modules/crc/slot1/crc.bin",
+      "length": 332,
+      "sha256": "643657157a929eeac4d7dcc61f3750adaf7b36c746eb169bd75e9231b619d3c3"
+    },
+    {
+      "path": "build_modules/crc/slot2/crc.bin",
+      "length": 332,
+      "sha256": "1c58bdcea404e71b6f3d7d2f5ab67943e1a5d2ffac618eff1352330caeee03e0"
+    },
+    {
+      "path": "build_modules/crc/slot3/crc.bin",
+      "length": 332,
+      "sha256": "542b80eb222c69b203edda8b361f487a00f66d162a735d3e8fe1713bad382e5e"
+    },
+    {
+      "path": "build_modules/crc/slot4/crc.bin",
+      "length": 332,
+      "sha256": "194345b11bcd793ef2fd65a861ef42c26436a679d637010b0f93af8151c0a2a2"
+    },
+    {
+      "path": "build_modules/crc/slot5/crc.bin",
+      "length": 332,
+      "sha256": "48b12a6c8eb5618c03fa71e14bc2a5aab755e17f3bd7528c69f00e844f88a788"
+    },
+    {
+      "path": "build_modules/crc/slot6/crc.bin",
+      "length": 332,
+      "sha256": "5604f6216ac360519a03779fb5d65272e2631a5bc15a80a252da6b03c8c007f7"
+    },
+    {
+      "path": "build_modules/crc/slot7/crc.bin",
+      "length": 332,
+      "sha256": "92f1155ccd63237c44b5693e6f3fdb55862fb63e74d36fc24d0ec09b4cda3d06"
+    },
+    {
+      "path": "build_modules/dac/slot0/dac.bin",
+      "length": 1136,
+      "sha256": "53f5f484fbb6c6f728afbe4a8d09af059f16214531f6134118c57b5820e935af"
+    },
+    {
+      "path": "build_modules/dac/slot1/dac.bin",
+      "length": 1136,
+      "sha256": "e8cea23adc884451449f90333e1daf5fa245f48eb74a9ff1bf41c97f0dd98076"
+    },
+    {
+      "path": "build_modules/dac/slot2/dac.bin",
+      "length": 1136,
+      "sha256": "f8908ff0312e99525520c270624f058e1b531ff1dcd3764640d3626c38e9a02f"
+    },
+    {
+      "path": "build_modules/dac/slot3/dac.bin",
+      "length": 1136,
+      "sha256": "19468a3da75da0d5e28d29021b6d530f54d9c72b1b53b4e4dd793c99e6218ff2"
+    },
+    {
+      "path": "build_modules/dac/slot4/dac.bin",
+      "length": 1136,
+      "sha256": "dfd32ab7641653ce62ce457b69d1461e2aa3d39b69a2d5e957629cc52844a0c7"
+    },
+    {
+      "path": "build_modules/dac/slot5/dac.bin",
+      "length": 1136,
+      "sha256": "59c2bed81ebc7f1b36ad05d11a1737bb9614ff2b6312fa622b4164df9d6a8869"
+    },
+    {
+      "path": "build_modules/dac/slot6/dac.bin",
+      "length": 1136,
+      "sha256": "3d11ee6e28033e961b8161ce790575322755bd13879c79a82268b95b4b2bcddf"
+    },
+    {
+      "path": "build_modules/dac/slot7/dac.bin",
+      "length": 1136,
+      "sha256": "13985e4e1c9b83ebfa66ef95b45a133f0c718af2b62067a02fd98d8e88524c9f"
+    },
+    {
+      "path": "build_modules/gpio/slot0/gpio.bin",
+      "length": 1624,
+      "sha256": "022037e5bd96a472c0260a69a0970af1643a6683270d506a9e64215d9a7f74f9"
+    },
+    {
+      "path": "build_modules/gpio/slot1/gpio.bin",
+      "length": 1624,
+      "sha256": "6c53507c844be92665425b778c893562034716649475e1c1dd0dc8c4ccb5bbe3"
+    },
+    {
+      "path": "build_modules/gpio/slot2/gpio.bin",
+      "length": 1624,
+      "sha256": "2280c5180fdbee975b9cacf2f1efd482b6faf719173ed01ee1a8a292867884ac"
+    },
+    {
+      "path": "build_modules/gpio/slot3/gpio.bin",
+      "length": 1624,
+      "sha256": "a49a2051410e784a9677271fd93d6cb910d3dc8b7a941d6eb442b7833249c917"
+    },
+    {
+      "path": "build_modules/gpio/slot4/gpio.bin",
+      "length": 1624,
+      "sha256": "8aff4242e68ec184eb620d469cfc349dedfc49f06d66ba7bb0cba1c618ac55e0"
+    },
+    {
+      "path": "build_modules/gpio/slot5/gpio.bin",
+      "length": 1624,
+      "sha256": "bc4d6718b5ca3820f9ac9851dc429ae45d5614a3176ff881aa6a371633993d27"
+    },
+    {
+      "path": "build_modules/gpio/slot6/gpio.bin",
+      "length": 1624,
+      "sha256": "bdc80c753e745c250ef5d4e764f888d20f955af418ba8d32a411b1a3bbb91fea"
+    },
+    {
+      "path": "build_modules/gpio/slot7/gpio.bin",
+      "length": 1624,
+      "sha256": "34a6765de6b0519f28bc729b56e20763875c130f081bdb0d1f2dd9676d7f467d"
+    },
+    {
+      "path": "build_modules/i2c/slot0/i2c.bin",
+      "length": 3456,
+      "sha256": "bc45171fa2fdd213667aec1ab2c0c575730872ce6fa9257843212f762dd22073"
+    },
+    {
+      "path": "build_modules/i2c/slot1/i2c.bin",
+      "length": 3456,
+      "sha256": "ac935c328cc23eec94733bf832137921ed23a0c66121aad53fcee4b73797d1e7"
+    },
+    {
+      "path": "build_modules/i2c/slot2/i2c.bin",
+      "length": 3456,
+      "sha256": "c9d5a4be691b9af8ac562be075a3ef05d15eeed3f09fdb12122be61af5c074f8"
+    },
+    {
+      "path": "build_modules/i2c/slot3/i2c.bin",
+      "length": 3456,
+      "sha256": "00fa07cb27478b1f18b62b1a49bf94730142d68c9854f73ab75b2222e2cb2987"
+    },
+    {
+      "path": "build_modules/i2c/slot4/i2c.bin",
+      "length": 3456,
+      "sha256": "3c71069f0c6e8edf535151125fb4b2a39093d3802ea658e40ec6118b9a5e1a28"
+    },
+    {
+      "path": "build_modules/i2c/slot5/i2c.bin",
+      "length": 3456,
+      "sha256": "29b418b2f652aa2c3498d2a922eef0e12d951190da9780ec3d071b4089579178"
+    },
+    {
+      "path": "build_modules/i2c/slot6/i2c.bin",
+      "length": 3456,
+      "sha256": "68e8ecfc7d43b219bba54cb2b59a7f79a3d6a9f7e7ec779faa093eac6f3a66ce"
+    },
+    {
+      "path": "build_modules/i2c/slot7/i2c.bin",
+      "length": 3456,
+      "sha256": "355765bec84a08e0c683271f716a9ef9b60c298945cd011f58ee4810442147e1"
+    },
+    {
+      "path": "build_modules/index.json",
+      "length": 62186,
+      "sha256": "f36635a20099d01062e1b07f5ad1221b0ca2da4e1af7b432046e07cf60c77fa6"
+    },
+    {
+      "path": "build_modules/opa/slot0/opa.bin",
+      "length": 1552,
+      "sha256": "3961e19c6d551fb4c0c79730a786f68eb7d2630066ef4e28ea6e606a8f1c5a3b"
+    },
+    {
+      "path": "build_modules/opa/slot1/opa.bin",
+      "length": 1552,
+      "sha256": "2f0cb27bb7613b0f305f9b380d052a0c6d8c7dc5ca67f1758d144bf46dc6b9eb"
+    },
+    {
+      "path": "build_modules/opa/slot2/opa.bin",
+      "length": 1552,
+      "sha256": "30a720402766fe036d9afca29823afc1fab3051969b1f18f21461bd5bcd9acdc"
+    },
+    {
+      "path": "build_modules/opa/slot3/opa.bin",
+      "length": 1552,
+      "sha256": "999700a0e709baff16a9b095d593c49399782f040bc1a0ea8ab2b14d3cdf6a3a"
+    },
+    {
+      "path": "build_modules/opa/slot4/opa.bin",
+      "length": 1552,
+      "sha256": "6d4dea117c27e1970792095fab2fad77564da9961d452adbcae74cf6270236e1"
+    },
+    {
+      "path": "build_modules/opa/slot5/opa.bin",
+      "length": 1552,
+      "sha256": "789633876f4d47d3780868e65215c457abe3562a38587e04ab3c2691ce6e1339"
+    },
+    {
+      "path": "build_modules/opa/slot6/opa.bin",
+      "length": 1552,
+      "sha256": "269b2a28ddbe59755e273eee2c043192d648cbe6b6656ec91f5a7cf01ffb80e2"
+    },
+    {
+      "path": "build_modules/opa/slot7/opa.bin",
+      "length": 1552,
+      "sha256": "dc4a14b6445d86432b4ebb5e9668949d33865320a3d27437c3edffc68d5c2775"
+    },
+    {
+      "path": "build_modules/pwm/slot0/pwm.bin",
+      "length": 4000,
+      "sha256": "42f547be967b23fa8c0bdf5ff70d815a6a06e64e7fa4d63029a7dd1b62c6f46d"
+    },
+    {
+      "path": "build_modules/pwm/slot1/pwm.bin",
+      "length": 4000,
+      "sha256": "0d1d2a57e430383fdcdd0d65c164890f0febf2525a8108e579f854a041029cc5"
+    },
+    {
+      "path": "build_modules/pwm/slot2/pwm.bin",
+      "length": 4000,
+      "sha256": "3626df2a072c6e0a06146dd4e7c1accc0e90f5718c2cf5a7e1da1c69dd5fa4f5"
+    },
+    {
+      "path": "build_modules/pwm/slot3/pwm.bin",
+      "length": 4000,
+      "sha256": "471d67b9b8c518f60d178f3bd45eb3e2a269e439c0c604519ba6f9bc8a7f23e9"
+    },
+    {
+      "path": "build_modules/pwm/slot4/pwm.bin",
+      "length": 4000,
+      "sha256": "8cb2ffdf7589432636653266131499adbd3cdf6b8d82cf01743cda21fca5a8c2"
+    },
+    {
+      "path": "build_modules/pwm/slot5/pwm.bin",
+      "length": 4000,
+      "sha256": "8ba4ffbe97b19c13f64fc3904e766768b2e21b07fb55f3dbde445a67a7c27569"
+    },
+    {
+      "path": "build_modules/pwm/slot6/pwm.bin",
+      "length": 4000,
+      "sha256": "9022dbee06a7c5b5a8feadffff9a272b4f2da10dcd7117e649e9e478a1cff045"
+    },
+    {
+      "path": "build_modules/pwm/slot7/pwm.bin",
+      "length": 4000,
+      "sha256": "c72bd82296b8c30e5f05d90ceaf46d275309fd598e5a4220bcb36699550639bf"
+    },
+    {
+      "path": "build_modules/rtc/slot0/rtc.bin",
+      "length": 1412,
+      "sha256": "5a6f7409ceb10e656dffe72896eb0352d93bf6368f829167368e72bc745c5366"
+    },
+    {
+      "path": "build_modules/rtc/slot1/rtc.bin",
+      "length": 1412,
+      "sha256": "769e9cbeb00da8c5c4483265a76b700c849890483dc961a2e93bc44b7ec7601a"
+    },
+    {
+      "path": "build_modules/rtc/slot2/rtc.bin",
+      "length": 1412,
+      "sha256": "19badbd68368dadaa383def49d90a10c5bc1cc41e66dda1582edd6ad222369e1"
+    },
+    {
+      "path": "build_modules/rtc/slot3/rtc.bin",
+      "length": 1412,
+      "sha256": "3f681108e96efb35ad4bac6c9582cc7f46220808e117ee4d73336c23daf8f219"
+    },
+    {
+      "path": "build_modules/rtc/slot4/rtc.bin",
+      "length": 1412,
+      "sha256": "bc66c9fe7b2b2d2da4c44e9bf6d52e9369db1d769e5a11bb99b206abef69c5df"
+    },
+    {
+      "path": "build_modules/rtc/slot5/rtc.bin",
+      "length": 1412,
+      "sha256": "2642bf7aac9050ff5f4e69550ebc1be88d38a38cb9de4e50d2df0422ec06e4eb"
+    },
+    {
+      "path": "build_modules/rtc/slot6/rtc.bin",
+      "length": 1412,
+      "sha256": "54d9547157a5b82b7d213db39335eda0f996e38deb779023c252f0a15a37f7fa"
+    },
+    {
+      "path": "build_modules/rtc/slot7/rtc.bin",
+      "length": 1412,
+      "sha256": "f88dae18ab1882b74338b93fbe77fe138d5aa0fdfe73bcc4a99666f8a3fd3912"
+    },
+    {
+      "path": "build_modules/spi/slot0/spi.bin",
+      "length": 2608,
+      "sha256": "0514f606c3a4b577d679c7e7c25072684ee14025f17430c817976f0be9aa740e"
+    },
+    {
+      "path": "build_modules/spi/slot1/spi.bin",
+      "length": 2608,
+      "sha256": "fa13da12f9511d83977bb3bff0762ce3bd04aea68f95c27c51fce79c8849e84e"
+    },
+    {
+      "path": "build_modules/spi/slot2/spi.bin",
+      "length": 2608,
+      "sha256": "880eae1eea05f40659a389423446cffe8ef75825c284ed6d83c801aa2a2a007e"
+    },
+    {
+      "path": "build_modules/spi/slot3/spi.bin",
+      "length": 2608,
+      "sha256": "be2ef07179e5d9a71dbe5cf4dfe64f6a6bc991c6d152c3fd2976c037d02b83d5"
+    },
+    {
+      "path": "build_modules/spi/slot4/spi.bin",
+      "length": 2608,
+      "sha256": "44d0a0dbc1f5d926bdf6d2643daff5cdd47383f6aa372f214f6d63d6788898bd"
+    },
+    {
+      "path": "build_modules/spi/slot5/spi.bin",
+      "length": 2608,
+      "sha256": "d0c3b8fe5ac1edbd1ac40a45b2a620ee6e767d81a0681aaa8305ce559ca0acfc"
+    },
+    {
+      "path": "build_modules/spi/slot6/spi.bin",
+      "length": 2608,
+      "sha256": "3732a51a3bd1a24c228814d84f26a2783f9f74d9596efbf59e3d924f08614706"
+    },
+    {
+      "path": "build_modules/spi/slot7/spi.bin",
+      "length": 2608,
+      "sha256": "bc42bcb8245816ed2414c2bbc7c58e94825b4ec5c7c13b2a8480a18de5b39e98"
+    },
+    {
+      "path": "build_modules/tmr/slot0/tmr.bin",
+      "length": 4016,
+      "sha256": "4e0cb4c9798be58e12b0e02308f47f55022782d9c49317018b133f5e132f9378"
+    },
+    {
+      "path": "build_modules/tmr/slot1/tmr.bin",
+      "length": 4016,
+      "sha256": "5995a91de19a44ee2ea41663fe71ec1eb8b84677fdda268b4e1e8bc950b3852c"
+    },
+    {
+      "path": "build_modules/tmr/slot2/tmr.bin",
+      "length": 4016,
+      "sha256": "796d3925c50cb9ba5dcd834a42acee0a219870108e0a4366459e088fd7ed01b5"
+    },
+    {
+      "path": "build_modules/tmr/slot3/tmr.bin",
+      "length": 4016,
+      "sha256": "0f42478289d367882b9fecc0c1022e66bddc9c37001132c3a4b0f2e5fdf2c6f4"
+    },
+    {
+      "path": "build_modules/tmr/slot4/tmr.bin",
+      "length": 4016,
+      "sha256": "1e8968d6add76276b8538c052303e1c9e251e07d41b9ee10b927fbe03426354c"
+    },
+    {
+      "path": "build_modules/tmr/slot5/tmr.bin",
+      "length": 4016,
+      "sha256": "ec2d917d023a023f2ae3664ab38a6fe9b4c7529cc03bcc1cfebc078f53f7ab7a"
+    },
+    {
+      "path": "build_modules/tmr/slot6/tmr.bin",
+      "length": 4016,
+      "sha256": "427d4d34d752cd6fc974a73c6eb9f605385c287592e70160fd87322a63a80adf"
+    },
+    {
+      "path": "build_modules/tmr/slot7/tmr.bin",
+      "length": 4016,
+      "sha256": "daa562f4eefe9a4b3d4918457cd7373e370a5e0020f81bc4d9d9ba73b83cb96c"
+    },
+    {
+      "path": "build_modules/uart/slot0/uart.bin",
+      "length": 3532,
+      "sha256": "c7ca56e41ff07052b9bc3e69d77abe6b0d4293707ad1878cc54f1c373ba742ef"
+    },
+    {
+      "path": "build_modules/uart/slot1/uart.bin",
+      "length": 3532,
+      "sha256": "3b8b1872da5fae1a521faa477d7306d69d8d83068cafe27d416f00df5767654a"
+    },
+    {
+      "path": "build_modules/uart/slot2/uart.bin",
+      "length": 3532,
+      "sha256": "f5e76e8f2a928890e723bcf7558731f980a96a6be560258cd2a860ffe0c54152"
+    },
+    {
+      "path": "build_modules/uart/slot3/uart.bin",
+      "length": 3532,
+      "sha256": "5a93bb48c51276dda7b5a94ae9108f233aaf94e3197c6eb956e5b30991bf1486"
+    },
+    {
+      "path": "build_modules/uart/slot4/uart.bin",
+      "length": 3532,
+      "sha256": "5577ab3cca7ffb42ac331da134298e461ba206a9f577edd93b7566063947addd"
+    },
+    {
+      "path": "build_modules/uart/slot5/uart.bin",
+      "length": 3532,
+      "sha256": "0fb12997ea9815514acc57b6c7779ab65ad3f8999595f8b5e1c2cf55565752e6"
+    },
+    {
+      "path": "build_modules/uart/slot6/uart.bin",
+      "length": 3532,
+      "sha256": "bc5e532b88ffff75f325cda26e2627f25ea75d8d90b00730b59d8dfc93a1d396"
+    },
+    {
+      "path": "build_modules/uart/slot7/uart.bin",
+      "length": 3532,
+      "sha256": "5187bd49d7d2684bed136ccfa9f963b9e8efbd277c166603a6cc3df35d429bb7"
+    },
+    {
+      "path": "modules/modules.json",
+      "length": 4131,
+      "sha256": "cf1c317d2954de76866866de5e93cbec0bf31e118357aaa6ca80c42a88cbf851"
+    }
+  ]
+}

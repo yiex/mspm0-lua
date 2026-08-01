@@ -1,0 +1,15 @@
+-- Board LED PA14 via gpio + pwm (no led.* module)
+gpio.mode("PA14", "out")
+for i = 1, 6 do
+  gpio.toggle("PA14")
+  delay_ms(120)
+end
+gpio.set("PA14", 0)
+gpio.release("PA14")
+pwm.open("PA14", 1000)
+pwm.duty(0, 20)
+delay_ms(300)
+pwm.duty(0, 80)
+delay_ms(300)
+pwm.close(0)
+print("HI_LED_OK")

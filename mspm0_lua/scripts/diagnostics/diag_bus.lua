@@ -1,0 +1,5 @@
+local i2c_ok = i2c.write(0x7f, "", 100000)
+assert(type(i2c_ok) == "boolean", "i2c")
+local response = spi.xfer("PA17", "\x9f", 1000000)
+assert(#response == 1, "spi")
+print("DIAG_BUS_OK")

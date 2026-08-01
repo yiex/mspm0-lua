@@ -1,0 +1,6 @@
+si 1
+speed 4000
+device MSPM0G3507
+connect
+ShowEmuList
+exit

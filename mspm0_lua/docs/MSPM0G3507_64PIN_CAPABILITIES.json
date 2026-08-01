@@ -1,0 +1,1694 @@
+{
+  "device": "MSPM0G3507",
+  "package": "PM LQFP-64",
+  "gpio_count": 60,
+  "pins": {
+    "PA0": {
+      "iomux": 0,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "I2C0_SDA"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA_FAULT1"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 7,
+          "signal": "SYSCTL_FCC_IN"
+        }
+      ]
+    },
+    "PA1": {
+      "iomux": 1,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "I2C0_SCL"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA_FAULT2"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG8_IDX"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG8_CCP0"
+        }
+      ]
+    },
+    "PA2": {
+      "iomux": 6,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS0"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG7_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "SPI1_CS0"
+        }
+      ]
+    },
+    "PA3": {
+      "iomux": 7,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS1_POCI1"
+        },
+        {
+          "pf": 4,
+          "signal": "UART2_CTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP2"
+        },
+        {
+          "pf": 6,
+          "signal": "COMP1_OUT"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP0"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA0_CCP1"
+        },
+        {
+          "pf": 9,
+          "signal": "I2C1_SDA"
+        }
+      ]
+    },
+    "PA4": {
+      "iomux": 8,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_POCI"
+        },
+        {
+          "pf": 4,
+          "signal": "UART2_RTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 6,
+          "signal": "SYSCTL_LFCLKIN"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA0_CCP1_CMPL"
+        },
+        {
+          "pf": 9,
+          "signal": "I2C1_SCL"
+        }
+      ]
+    },
+    "PA5": {
+      "iomux": 9,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_PICO"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA_FAULT1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG0_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG6_CCP0"
+        },
+        {
+          "pf": 7,
+          "signal": "SYSCTL_FCC_IN"
+        }
+      ]
+    },
+    "PA6": {
+      "iomux": 10,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_SCLK"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA_FAULT0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG0_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "SYSCTL_HFCLKIN"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG6_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA0_CCP2_CMPL"
+        }
+      ]
+    },
+    "PA7": {
+      "iomux": 13,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "COMP0_OUT"
+        },
+        {
+          "pf": 3,
+          "signal": "SYSCTL_CLK_OUT"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP2"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG8_IDX"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA0_CCP1"
+        }
+      ]
+    },
+    "PA8": {
+      "iomux": 18,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS0"
+        },
+        {
+          "pf": 4,
+          "signal": "UART0_RTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA1_CCP0_CMPL"
+        }
+      ]
+    },
+    "PA9": {
+      "iomux": 19,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_PICO"
+        },
+        {
+          "pf": 4,
+          "signal": "UART0_CTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "RTC_RTC_OUT"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP0_CMPL"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP1_CMPL"
+        },
+        {
+          "pf": 9,
+          "signal": "SYSCTL_CLK_OUT"
+        }
+      ]
+    },
+    "PA10": {
+      "iomux": 20,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_POCI"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C0_SDA"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA1_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG12_CCP0"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP2"
+        },
+        {
+          "pf": 8,
+          "signal": "I2C1_SDA"
+        },
+        {
+          "pf": 9,
+          "signal": "SYSCTL_CLK_OUT"
+        }
+      ]
+    },
+    "PA11": {
+      "iomux": 21,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_SCLK"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C0_SCL"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA1_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "COMP0_OUT"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP2_CMPL"
+        },
+        {
+          "pf": 8,
+          "signal": "I2C1_SCL"
+        }
+      ]
+    },
+    "PA12": {
+      "iomux": 33,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_CTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_SCLK"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG0_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "CANFD0_CANTX"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 7,
+          "signal": "SYSCTL_FCC_IN"
+        }
+      ]
+    },
+    "PA13": {
+      "iomux": 34,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_RTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_POCI"
+        },
+        {
+          "pf": 4,
+          "signal": "UART3_RX"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG0_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "CANFD0_CANRX"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP3_CMPL"
+        }
+      ]
+    },
+    "PA14": {
+      "iomux": 35,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_CTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_PICO"
+        },
+        {
+          "pf": 4,
+          "signal": "UART3_TX"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG12_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "SYSCTL_CLK_OUT"
+        }
+      ]
+    },
+    "PA15": {
+      "iomux": 36,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_RTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS2_POCI2"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C1_SCL"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA1_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG8_IDX"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA1_CCP0_CMPL"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA0_CCP2"
+        }
+      ]
+    },
+    "PA16": {
+      "iomux": 37,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "COMP2_OUT"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_POCI"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C1_SDA"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA1_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA1_CCP1_CMPL"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP2_CMPL"
+        },
+        {
+          "pf": 8,
+          "signal": "SYSCTL_FCC_IN"
+        }
+      ]
+    },
+    "PA17": {
+      "iomux": 38,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_SCLK"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C1_SCL"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG7_CCP0"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA1_CCP0"
+        }
+      ]
+    },
+    "PA18": {
+      "iomux": 39,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_PICO"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C1_SDA"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP3_CMPL"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG7_CCP1"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA1_CCP1"
+        }
+      ]
+    },
+    "PA19": {
+      "iomux": 40,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "DEBUGSS_SWDIO"
+        }
+      ]
+    },
+    "PA20": {
+      "iomux": 41,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "DEBUGSS_SWCLK"
+        }
+      ]
+    },
+    "PA21": {
+      "iomux": 45,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 4,
+          "signal": "UART1_CTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG6_CCP0"
+        }
+      ]
+    },
+    "PA22": {
+      "iomux": 46,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 4,
+          "signal": "UART1_RTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "SYSCTL_CLK_OUT"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP0_CMPL"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMG6_CCP1"
+        }
+      ]
+    },
+    "PA23": {
+      "iomux": 52,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS3_CD_POCI3"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG0_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "UART3_CTS"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP0"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMG8_CCP0"
+        }
+      ]
+    },
+    "PA24": {
+      "iomux": 53,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS2_POCI2"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP3_CMPL"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG0_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "UART3_RTS"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP1"
+        }
+      ]
+    },
+    "PA25": {
+      "iomux": 54,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS3_CD_POCI3"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG12_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA0_CCP1_CMPL"
+        }
+      ]
+    },
+    "PA26": {
+      "iomux": 58,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS0"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA_FAULT0"
+        },
+        {
+          "pf": 6,
+          "signal": "CANFD0_CANTX"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP0"
+        }
+      ]
+    },
+    "PA27": {
+      "iomux": 59,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "RTC_RTC_OUT"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS1_POCI1"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA_FAULT2"
+        },
+        {
+          "pf": 6,
+          "signal": "CANFD0_CANRX"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP1"
+        }
+      ]
+    },
+    "PA28": {
+      "iomux": 2,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "I2C0_SDA"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA_FAULT0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG7_CCP0"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA1_CCP0"
+        }
+      ]
+    },
+    "PA29": {
+      "iomux": 3,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "I2C1_SCL"
+        },
+        {
+          "pf": 3,
+          "signal": "UART2_RTS"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG6_CCP0"
+        }
+      ]
+    },
+    "PA30": {
+      "iomux": 4,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "I2C1_SDA"
+        },
+        {
+          "pf": 3,
+          "signal": "UART2_CTS"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG6_CCP1"
+        }
+      ]
+    },
+    "PA31": {
+      "iomux": 5,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "I2C0_SCL"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP3_CMPL"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG12_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "SYSCTL_CLK_OUT"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG7_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP1"
+        }
+      ]
+    },
+    "PB0": {
+      "iomux": 11,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS2_POCI2"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA1_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP2"
+        }
+      ]
+    },
+    "PB1": {
+      "iomux": 12,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS3_CD_POCI3"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA1_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP2_CMPL"
+        }
+      ]
+    },
+    "PB2": {
+      "iomux": 14,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "UART2_CTS"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C1_SCL"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 6,
+          "signal": "UART1_CTS"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG6_CCP0"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP0"
+        }
+      ]
+    },
+    "PB3": {
+      "iomux": 15,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "UART2_RTS"
+        },
+        {
+          "pf": 4,
+          "signal": "I2C1_SDA"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP3_CMPL"
+        },
+        {
+          "pf": 6,
+          "signal": "UART1_RTS"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG6_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP1"
+        }
+      ]
+    },
+    "PB4": {
+      "iomux": 16,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "UART3_CTS"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA1_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP2"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA1_CCP0_CMPL"
+        }
+      ]
+    },
+    "PB5": {
+      "iomux": 17,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "UART3_RTS"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA1_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP2_CMPL"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA1_CCP1_CMPL"
+        }
+      ]
+    },
+    "PB6": {
+      "iomux": 22,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS0"
+        },
+        {
+          "pf": 4,
+          "signal": "SPI0_CS1_POCI1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "UART2_CTS"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG6_CCP0"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP0_CMPL"
+        }
+      ]
+    },
+    "PB7": {
+      "iomux": 23,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_POCI"
+        },
+        {
+          "pf": 4,
+          "signal": "SPI0_CS2_POCI2"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "UART2_RTS"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMG6_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP1_CMPL"
+        }
+      ]
+    },
+    "PB8": {
+      "iomux": 24,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_CTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_PICO"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "COMP1_OUT"
+        }
+      ]
+    },
+    "PB9": {
+      "iomux": 25,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART1_RTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_SCLK"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP0_CMPL"
+        }
+      ]
+    },
+    "PB10": {
+      "iomux": 26,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "TIMG0_CCP0"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 4,
+          "signal": "COMP1_OUT"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG6_CCP0"
+        }
+      ]
+    },
+    "PB11": {
+      "iomux": 27,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "TIMG0_CCP1"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 4,
+          "signal": "SYSCTL_CLK_OUT"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG6_CCP1"
+        }
+      ]
+    },
+    "PB12": {
+      "iomux": 28,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMA0_CCP2"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA_FAULT1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP1"
+        }
+      ]
+    },
+    "PB13": {
+      "iomux": 29,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART3_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG12_CCP0"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA0_CCP1_CMPL"
+        }
+      ]
+    },
+    "PB14": {
+      "iomux": 30,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "SPI1_CS3_CD_POCI3"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_POCI"
+        },
+        {
+          "pf": 4,
+          "signal": "SPI0_CS3_CD_POCI3"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG12_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG8_IDX"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP0"
+        }
+      ]
+    },
+    "PB15": {
+      "iomux": 31,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_PICO"
+        },
+        {
+          "pf": 4,
+          "signal": "UART3_CTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG8_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG7_CCP0"
+        }
+      ]
+    },
+    "PB16": {
+      "iomux": 32,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_SCLK"
+        },
+        {
+          "pf": 4,
+          "signal": "UART3_RTS"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG7_CCP1"
+        }
+      ]
+    },
+    "PB17": {
+      "iomux": 42,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_TX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_PICO"
+        },
+        {
+          "pf": 4,
+          "signal": "SPI1_CS1_POCI1"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA1_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA0_CCP2"
+        }
+      ]
+    },
+    "PB18": {
+      "iomux": 43,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART2_RX"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_SCLK"
+        },
+        {
+          "pf": 4,
+          "signal": "SPI1_CS2_POCI2"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMA1_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA0_CCP2_CMPL"
+        }
+      ]
+    },
+    "PB19": {
+      "iomux": 44,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "COMP2_OUT"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_POCI"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMG8_CCP1"
+        },
+        {
+          "pf": 5,
+          "signal": "UART0_CTS"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMG7_CCP1"
+        }
+      ]
+    },
+    "PB20": {
+      "iomux": 47,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "SPI0_CS2_POCI2"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS0"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP2"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG12_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA_FAULT1"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA0_CCP1"
+        },
+        {
+          "pf": 8,
+          "signal": "TIMA1_CCP1_CMPL"
+        }
+      ]
+    },
+    "PB21": {
+      "iomux": 48,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "SPI1_POCI"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMG8_CCP0"
+        }
+      ]
+    },
+    "PB22": {
+      "iomux": 49,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "SPI1_PICO"
+        },
+        {
+          "pf": 3,
+          "signal": "TIMG8_CCP1"
+        }
+      ]
+    },
+    "PB23": {
+      "iomux": 50,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "SPI1_SCLK"
+        },
+        {
+          "pf": 3,
+          "signal": "COMP0_OUT"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA_FAULT0"
+        }
+      ]
+    },
+    "PB24": {
+      "iomux": 51,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "SPI0_CS3_CD_POCI3"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS1_POCI1"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG12_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA0_CCP1_CMPL"
+        },
+        {
+          "pf": 7,
+          "signal": "TIMA1_CCP0_CMPL"
+        }
+      ]
+    },
+    "PB25": {
+      "iomux": 55,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_CTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS0"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA_FAULT2"
+        }
+      ]
+    },
+    "PB26": {
+      "iomux": 56,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "UART0_RTS"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI0_CS1_POCI1"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP3"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG6_CCP0"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA1_CCP0"
+        }
+      ]
+    },
+    "PB27": {
+      "iomux": 57,
+      "functions": [
+        {
+          "pf": 2,
+          "signal": "COMP2_OUT"
+        },
+        {
+          "pf": 3,
+          "signal": "SPI1_CS1_POCI1"
+        },
+        {
+          "pf": 4,
+          "signal": "TIMA0_CCP3_CMPL"
+        },
+        {
+          "pf": 5,
+          "signal": "TIMG6_CCP1"
+        },
+        {
+          "pf": 6,
+          "signal": "TIMA1_CCP1"
+        }
+      ]
+    }
+  },
+  "adc_routes": [
+    {
+      "pin": "PA27",
+      "instance": 0,
+      "channel": 0
+    },
+    {
+      "pin": "PA26",
+      "instance": 0,
+      "channel": 1
+    },
+    {
+      "pin": "PA25",
+      "instance": 0,
+      "channel": 2
+    },
+    {
+      "pin": "PA24",
+      "instance": 0,
+      "channel": 3
+    },
+    {
+      "pin": "PB25",
+      "instance": 0,
+      "channel": 4
+    },
+    {
+      "pin": "PB24",
+      "instance": 0,
+      "channel": 5
+    },
+    {
+      "pin": "PB20",
+      "instance": 0,
+      "channel": 6
+    },
+    {
+      "pin": "PA22",
+      "instance": 0,
+      "channel": 7
+    },
+    {
+      "pin": "PA14",
+      "instance": 0,
+      "channel": 12
+    },
+    {
+      "pin": "PA15",
+      "instance": 1,
+      "channel": 0
+    },
+    {
+      "pin": "PA16",
+      "instance": 1,
+      "channel": 1
+    },
+    {
+      "pin": "PA17",
+      "instance": 1,
+      "channel": 2
+    },
+    {
+      "pin": "PA18",
+      "instance": 1,
+      "channel": 3
+    },
+    {
+      "pin": "PB17",
+      "instance": 1,
+      "channel": 4
+    },
+    {
+      "pin": "PB18",
+      "instance": 1,
+      "channel": 5
+    },
+    {
+      "pin": "PB19",
+      "instance": 1,
+      "channel": 6
+    },
+    {
+      "pin": "PA21",
+      "instance": 1,
+      "channel": 7
+    }
+  ],
+  "route_counts": {
+    "i2c": 18,
+    "spi": 50,
+    "uart": 61,
+    "timer": 149,
+    "can": 4,
+    "adc": 17
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "$schema": "../schemas/chip.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "chip",
+  "id": "ti.mspm0g3507.lqfp48",
+  "version": "0.1.0",
+  "vendor": "Texas Instruments",
+  "family": "MSPM0G",
+  "model": "MSPM0G3507",
+  "display_name": "MSPM0G3507 (LQFP-48, illustrative subset)",
+  "package": {
+    "id": "lqfp48",
+    "name": "LQFP-48",
+    "pin_count": 48
+  },
+  "naming": {
+    "pin_pattern": "^P[A-Z][0-9]+$",
+    "case_sensitive": false,
+    "canonical_case": "upper"
+  },
+  "quality": {
+    "status": "draft",
+    "coverage": "example",
+    "notes": "Non-authoritative subset. Physical package positions and the complete TI pin-mux table must be replaced with verified source data before diagnostics are enabled."
+  },
+  "features": ["i2c"],
+  "peripherals": [
+    {
+      "id": "I2C1",
+      "class": "i2c",
+      "instance": 1,
+      "signals": ["SCL", "SDA"],
+      "description": "Illustrative I2C instance used by the bundled examples."
+    }
+  ],
+  "pins": [
+    {
+      "id": "PA10",
+      "package_positions": ["unverified-pa10"],
+      "capabilities": [
+        {
+          "id": "gpio.pa10",
+          "function": "GPIO_PA10",
+          "class": "gpio",
+          "mode": "gpio",
+          "direction": "bidirectional"
+        }
+      ]
+    },
+    {
+      "id": "PA11",
+      "package_positions": ["unverified-pa11"],
+      "capabilities": [
+        {
+          "id": "gpio.pa11",
+          "function": "GPIO_PA11",
+          "class": "gpio",
+          "mode": "gpio",
+          "direction": "bidirectional"
+        }
+      ]
+    },
+    {
+      "id": "PA15",
+      "package_positions": ["unverified-pa15"],
+      "capabilities": [
+        {
+          "id": "gpio.pa15",
+          "function": "GPIO_PA15",
+          "class": "gpio",
+          "mode": "gpio",
+          "direction": "bidirectional"
+        },
+        {
+          "id": "i2c1.scl.route-a",
+          "function": "I2C1_SCL",
+          "class": "i2c",
+          "mode": "alternate",
+          "direction": "bidirectional",
+          "peripheral": "I2C1",
+          "signal": "SCL",
+          "route": "i2c1.route-a",
+          "attributes": ["open_drain"]
+        }
+      ]
+    },
+    {
+      "id": "PA16",
+      "package_positions": ["unverified-pa16"],
+      "capabilities": [
+        {
+          "id": "gpio.pa16",
+          "function": "GPIO_PA16",
+          "class": "gpio",
+          "mode": "gpio",
+          "direction": "bidirectional"
+        },
+        {
+          "id": "i2c1.sda.route-a",
+          "function": "I2C1_SDA",
+          "class": "i2c",
+          "mode": "alternate",
+          "direction": "bidirectional",
+          "peripheral": "I2C1",
+          "signal": "SDA",
+          "route": "i2c1.route-a",
+          "attributes": ["open_drain"]
+        }
+      ]
+    },
+    {
+      "id": "PA18",
+      "package_positions": ["unverified-pa18"],
+      "capabilities": [
+        {
+          "id": "gpio.pa18",
+          "function": "GPIO_PA18",
+          "class": "gpio",
+          "mode": "gpio",
+          "direction": "bidirectional"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "example.package-data-incomplete",
+      "kind": "package",
+      "severity": "error",
+      "members": ["package_positions"],
+      "message": "This example omits authoritative package positions and must not be used as production chip metadata."
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "title": "Bundled IDE I2C examples and current hard-coded diagnostics",
+        "revision": "workspace snapshot 2026-07-27"
+      }
+    ],
+    "license": "CC0-1.0 for this illustrative metadata only; verify hardware facts against licensed vendor documentation",
+    "copyright": "Example metadata structure (c) 2026 project contributors"
+  }
+}

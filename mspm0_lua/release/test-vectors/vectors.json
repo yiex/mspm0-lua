@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "catalog": {
+    "id": "mspm0g3507.lua-modular",
+    "version": "1.0.6",
+    "firmware_id": "mspm0g3507.lua-modular",
+    "firmware_version": "1.0.6",
+    "target": "MSPM0G3507",
+    "core_abi": 7,
+    "module_format": 2,
+    "nmup_format": 1
+  },
+  "layout": {
+    "abi_version": 7,
+    "core_end": 98047,
+    "core_api": 98048,
+    "slot_base": 98304,
+    "slot_size": 4096,
+    "slot_count": 8,
+    "empty_slots_allowed": true,
+    "vm_rebuild_required": true
+  },
+  "crc_algorithms": {
+    "bundle_and_image": "CRC-32/ISO-HDLC as Python binascii.crc32",
+    "module_payload": "CRC-16/MODBUS, initial 0xffff, polynomial 0xa001"
+  },
+  "vectors": {
+    "i2c-only-valid.nmup": {
+      "length": 3744,
+      "sha256": "e131e72dfdd2555421d35a5031794e0dd9901e4e2119670dd305e3ada06594b3",
+      "bundle_crc32": "30aa8af7",
+      "header": {
+        "magic_ascii": "NMUP",
+        "format": 1,
+        "abi": 7,
+        "header_size": 288,
+        "slot_count": 8,
+        "selected_count": 1,
+        "total_size": 3744,
+        "crc32_offset": 16
+      },
+      "entries": [
+        {
+          "slot": 0,
+          "present": true,
+          "size": 3456,
+          "payload_offset": 288,
+          "image_crc32": "1864073b",
+          "module_crc16": "f117",
+          "name": "i2c"
+        },
+        {
+          "slot": 1,
+          "present": false,
+          "size": 0,
+          "payload_offset": 0,
+          "image_crc32": "00000000",
+          "module_crc16": "0000",
+          "name": ""
+        },
+        {
+          "slot": 2,
+          "present": false,
+          "size": 0,
+          "payload_offset": 0,
+          "image_crc32": "00000000",
+          "module_crc16": "0000",
+          "name": ""
+        },
+        {
+          "slot": 3,
+          "present": false,
+          "size": 0,
+          "payload_offset": 0,
+          "image_crc32": "00000000",
+          "module_crc16": "0000",
+          "name": ""
+        },
+        {
+          "slot": 4,
+          "present": false,
+          "size": 0,
+          "payload_offset": 0,
+          "image_crc32": "00000000",
+          "module_crc16": "0000",
+          "name": ""
+        },
+        {
+          "slot": 5,
+          "present": false,
+          "size": 0,
+          "payload_offset": 0,
+          "image_crc32": "00000000",
+          "module_crc16": "0000",
+          "name": ""
+        },
+        {
+          "slot": 6,
+          "present": false,
+          "size": 0,
+          "payload_offset": 0,
+          "image_crc32": "00000000",
+          "module_crc16": "0000",
+          "name": ""
+        },
+        {
+          "slot": 7,
+          "present": false,
+          "size": 0,
+          "payload_offset": 0,
+          "image_crc32": "00000000",
+          "module_crc16": "0000",
+          "name": ""
+        }
+      ]
+    },
+    "full-valid.nmup": {
+      "length": 23808,
+      "sha256": "47291e989fbc315057c7173af9e57fa17340c3b6e295f8b1eb51c235554bae73",
+      "bundle_crc32": "558737e2",
+      "header": {
+        "magic_ascii": "NMUP",
+        "format": 1,
+        "abi": 7,
+        "header_size": 288,
+        "slot_count": 8,
+        "selected_count": 8,
+        "total_size": 23808,
+        "crc32_offset": 16
+      },
+      "entries": [
+        {
+          "slot": 0,
+          "present": true,
+          "size": 1624,
+          "payload_offset": 288,
+          "image_crc32": "d4f8aca0",
+          "module_crc16": "950a",
+          "name": "gpio"
+        },
+        {
+          "slot": 1,
+          "present": true,
+          "size": 4016,
+          "payload_offset": 1912,
+          "image_crc32": "5f35954a",
+          "module_crc16": "6aae",
+          "name": "tmr"
+        },
+        {
+          "slot": 2,
+          "present": true,
+          "size": 4000,
+          "payload_offset": 5928,
+          "image_crc32": "d2fd841c",
+          "module_crc16": "bb5d",
+          "name": "pwm"
+        },
+        {
+          "slot": 3,
+          "present": true,
+          "size": 1656,
+          "payload_offset": 9928,
+          "image_crc32": "f2b2b8f7",
+          "module_crc16": "3328",
+          "name": "adc"
+        },
+        {
+          "slot": 4,
+          "present": true,
+          "size": 3456,
+          "payload_offset": 11584,
+          "image_crc32": "ed8bbbd3",
+          "module_crc16": "791e",
+          "name": "i2c"
+        },
+        {
+          "slot": 5,
+          "present": true,
+          "size": 2608,
+          "payload_offset": 15040,
+          "image_crc32": "8598f8ee",
+          "module_crc16": "6835",
+          "name": "spi"
+        },
+        {
+          "slot": 6,
+          "present": true,
+          "size": 3532,
+          "payload_offset": 17648,
+          "image_crc32": "74d10fbd",
+          "module_crc16": "2b8a",
+          "name": "uart"
+        },
+        {
+          "slot": 7,
+          "present": true,
+          "size": 2628,
+          "payload_offset": 21180,
+          "image_crc32": "bf012d1d",
+          "module_crc16": "4f0e",
+          "name": "can"
+        }
+      ]
+    },
+    "i2c-only-bundle-crc.nmup": {
+      "length": 3744,
+      "sha256": "2a5542a1cf8246014e84a8e2c1a309a8b599c05136e2035714cefa820e288463",
+      "mutation": "last payload byte XOR 0x01; bundle CRC field unchanged",
+      "stored_bundle_crc32": "30aa8af7",
+      "computed_bundle_crc32": "47adba61",
+      "expected_response": "MOD_ERR bundle-crc",
+      "expected_state": "MOD_STATUS IDLE; internal slots unchanged; retry requires re-upload"
+    }
+  },
+  "hardware_verified_transcript": {
+    "path": "verified-transcript.txt",
+    "length": 13498,
+    "sha256": "589c05f4d829375d8341554350eadab47940857fbabe5e3e1e866217392f6944"
+  }
+}

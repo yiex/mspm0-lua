@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "catalog": {
+    "id": "mspm0g3507.lua-modular",
+    "version": "1.0.6",
+    "firmware_id": "mspm0g3507.lua-modular",
+    "firmware_version": "1.0.6",
+    "target": "MSPM0G3507",
+    "core_abi": 7,
+    "module_format": 2,
+    "nmup_format": 1
+  },
+  "layout": {
+    "abi_version": 7,
+    "core_end": 98047,
+    "core_api": 98048,
+    "slot_base": 98304,
+    "slot_size": 4096,
+    "slot_count": 8,
+    "empty_slots_allowed": true,
+    "vm_rebuild_required": true
+  },
+  "modules": [
+    {
+      "name": "uart", "display_name": "UART", "version": "1.0.0",
+      "source": "uart.c", "lua_modules": ["uart"],
+      "dependencies": [], "conflicts": [], "resources": ["UART0", "UART1", "UART2", "UART3", "pins"],
+      "resident": false
+    },
+    {
+      "name": "gpio", "display_name": "GPIO and pin mux", "version": "1.0.0",
+      "source": "gpio.c", "lua_modules": ["gpio"],
+      "dependencies": [], "conflicts": [], "resources": ["GPIOA", "GPIOB", "IOMUX"],
+      "resident": false
+    },
+    {
+      "name": "tmr", "display_name": "Timers and capture", "version": "1.0.1",
+      "source": "tmr.c", "lua_modules": ["tmr"],
+      "dependencies": [], "conflicts": [], "resources": ["TIMA0", "TIMA1", "TIMG0", "TIMG6", "TIMG7", "TIMG8", "TIMG12", "pins"],
+      "resident": false
+    },
+    {
+      "name": "pwm", "display_name": "PWM", "version": "1.0.1",
+      "source": "pwm.c", "lua_modules": ["pwm"],
+      "dependencies": [], "conflicts": [], "resources": ["TIMA0", "TIMA1", "TIMG6", "TIMG7", "TIMG8", "TIMG12", "pins"],
+      "resident": false
+    },
+    {
+      "name": "adc", "display_name": "ADC", "version": "1.0.0",
+      "source": "adc.c", "lua_modules": ["adc"],
+      "dependencies": [], "conflicts": [], "resources": ["ADC0", "ADC1", "pins"],
+      "resident": false
+    },
+    {
+      "name": "i2c", "display_name": "I2C", "version": "1.0.2",
+      "source": "i2c.c", "lua_modules": ["i2c"],
+      "dependencies": [], "conflicts": [], "resources": ["I2C0", "I2C1", "pins"],
+      "resident": false
+    },
+    {
+      "name": "spi", "display_name": "SPI", "version": "1.0.1",
+      "source": "spi.c", "lua_modules": ["spi"],
+      "dependencies": [], "conflicts": [], "resources": ["SPI0", "SPI1", "pins"],
+      "resident": false
+    },
+    {
+      "name": "can", "display_name": "MCAN", "version": "1.0.0",
+      "source": "can.c", "lua_modules": ["can"],
+      "dependencies": [], "conflicts": [], "resources": ["MCAN0", "pins"],
+      "resident": false
+    },
+    {
+      "name": "dac", "display_name": "DAC", "version": "1.0.0",
+      "source": "dac.c", "lua_modules": ["dac"],
+      "dependencies": [], "conflicts": [], "resources": ["DAC0", "PA15"],
+      "resident": false
+    },
+    {
+      "name": "crc", "display_name": "CRC", "version": "1.0.0",
+      "source": "crc.c", "lua_modules": ["crc"],
+      "dependencies": [], "conflicts": [], "resources": [],
+      "resident": false
+    },
+    {
+      "name": "comp", "display_name": "Comparator", "version": "1.0.0",
+      "source": "comp.c", "lua_modules": ["comp"],
+      "dependencies": [], "conflicts": [], "resources": ["COMP0", "COMP1", "COMP2", "pins"],
+      "resident": false
+    },
+    {
+      "name": "rtc", "display_name": "RTC", "version": "1.0.0",
+      "source": "rtc.c", "lua_modules": ["rtc"],
+      "dependencies": [], "conflicts": [], "resources": ["RTC"],
+      "resident": false
+    },
+    {
+      "name": "opa", "display_name": "Operational amplifier", "version": "1.0.0",
+      "source": "opa.c", "lua_modules": ["opa"],
+      "dependencies": [], "conflicts": [], "resources": ["OPA0", "OPA1", "pins"],
+      "resident": false
+    }
+  ],
+  "sets": {
+    "core": [],
+    "io": ["gpio"],
+    "timed_io": ["gpio", "tmr"],
+    "analog": ["gpio", "tmr", "pwm", "adc"],
+    "serial": ["gpio", "tmr", "i2c", "spi", "uart", "can"],
+    "full": ["gpio", "tmr", "pwm", "adc", "i2c", "spi", "uart", "can"],
+    "analog_io": ["gpio", "adc", "dac"],
+    "analog_monitor": ["gpio", "adc", "dac", "comp", "opa"],
+    "integrity": ["gpio", "uart", "crc"],
+    "clocked_io": ["gpio", "i2c", "rtc"],
+    "demo": ["gpio", "tmr"]
+  }
+}

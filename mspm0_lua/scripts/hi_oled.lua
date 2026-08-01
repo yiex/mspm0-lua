@@ -1,0 +1,26 @@
+-- OLED smoke on PA15 SCL / PA16 SDA (no _run.fnt needed for A-Z)
+print("HI_OLED_START")
+local ok, err = pcall(function()
+  oled.open()
+end)
+if not ok then
+  print("OLED_ABSENT", err)
+  print("HI_OLED_SKIP")
+  return
+end
+-- solid white then text: proves GDDRAM + I2C even if font wrong
+oled.fill(0xff)
+delay_ms(200)
+oled.clear()
+oled.cursor(0, 0)
+oled.print("MSPM0 LUA")
+oled.cursor(0, 2)
+oled.print("R:")
+oled.num(18, 2, -550, 1)
+oled.cursor(0, 4)
+oled.print("P:")
+oled.num(18, 4, 112, 1)
+oled.cursor(0, 6)
+oled.print("Y:")
+oled.num(18, 6, 431, 1)
+print("HI_OLED_OK")

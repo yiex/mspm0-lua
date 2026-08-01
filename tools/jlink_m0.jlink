@@ -1,0 +1,5 @@
+si 1
+speed 4000
+device Cortex-M0
+connect
+exit

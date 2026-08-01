@@ -1,0 +1,24 @@
+# Normalize text files to LF so content hashes (module catalog identity,
+# source SHA-256) stay identical across Linux and Windows checkouts.
+* text=auto eol=lf
+
+# Binary files must never be renormalized.
+*.bin binary
+*.elf binary
+*.o binary
+*.a binary
+*.lib binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ttf binary
+*.otf binary
+*.wasm binary
+*.exe binary
+*.dll binary
+*.luac binary
+*.vsix binary
+*.nmup binary
+*.pdf binary
+*.dxf binary

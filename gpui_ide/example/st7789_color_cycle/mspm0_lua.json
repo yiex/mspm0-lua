@@ -1,0 +1,5 @@
+{
+  "name": "ST7789 Color Cycle",
+  "target_luac": "main.luac",
+  "main_source": "main.lua"
+}

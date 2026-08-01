@@ -1,0 +1,492 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mspm0-lua.dev/metadata/v1/api.schema.json",
+  "title": "Firmware Lua API metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "id",
+    "version",
+    "firmware",
+    "compatibility",
+    "quality",
+    "types",
+    "enums",
+    "globals",
+    "modules",
+    "provenance"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
+    "schema_version": { "const": "1.0.0" },
+    "kind": { "const": "api" },
+    "id": { "$ref": "#/$defs/id" },
+    "version": { "$ref": "#/$defs/semver" },
+    "firmware": { "$ref": "#/$defs/firmware" },
+    "compatibility": { "$ref": "#/$defs/compatibility" },
+    "quality": { "$ref": "#/$defs/quality" },
+    "types": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/type_definition" }
+    },
+    "enums": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/enum_definition" }
+    },
+    "constants": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constant" }
+    },
+    "globals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/function" }
+    },
+    "modules": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/module" }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/diagnostic" }
+    },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "extensions": { "$ref": "#/$defs/extensions" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+      "minLength": 1
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9]+(?:\\.[a-z0-9_-]+)+$" },
+      "additionalProperties": true
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "coverage"],
+      "properties": {
+        "status": { "enum": ["draft", "reviewed", "verified", "deprecated"] },
+        "coverage": { "enum": ["example", "partial", "complete"] },
+        "reviewed_by": { "type": "string" },
+        "reviewed_at": { "type": "string", "format": "date" },
+        "notes": { "type": "string" }
+      }
+    },
+    "firmware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "abi"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "#/$defs/semver" },
+        "abi": { "$ref": "#/$defs/id" },
+        "lua_version": { "type": "string", "minLength": 1 },
+        "features": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "build_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chip_ids"],
+      "properties": {
+        "chip_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "board_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "required_chip_features": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "required_board_features": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "type_definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["primitive", "alias", "handle", "object", "callback"] },
+        "lua_type": {
+          "enum": ["nil", "boolean", "integer", "number", "string", "table", "function", "userdata", "thread", "any"]
+        },
+        "base": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/field" }
+        },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "optional": { "type": "boolean", "default": false },
+        "description": { "type": "string" }
+      }
+    },
+    "enum_definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "base_type", "values"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "base_type": { "enum": ["integer", "string"] },
+        "description": { "type": "string" },
+        "values": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/enum_value" }
+        },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "enum_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "type": ["integer", "string"] },
+        "description": { "type": "string" },
+        "deprecated": { "$ref": "#/$defs/deprecated" }
+      }
+    },
+    "constant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "value"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "value": { "$ref": "#/$defs/literal" },
+        "description": { "type": "string" },
+        "availability": { "$ref": "#/$defs/availability" },
+        "deprecated": { "$ref": "#/$defs/deprecated" }
+      }
+    },
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "functions"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "constants": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/constant" }
+        },
+        "functions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/function" }
+        },
+        "availability": { "$ref": "#/$defs/availability" },
+        "deprecated": { "$ref": "#/$defs/deprecated" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "function": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "overloads"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "description": { "type": "string" },
+        "overloads": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/overload" }
+        },
+        "snippets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/snippet" }
+        },
+        "availability": { "$ref": "#/$defs/availability" },
+        "deprecated": { "$ref": "#/$defs/deprecated" },
+        "diagnostic_overrides": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diagnostic" }
+        },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "overload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "params", "returns"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "params": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/parameter" }
+        },
+        "returns": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/return_value" }
+        },
+        "relations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/relation" }
+        },
+        "effects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/effect" }
+        },
+        "availability": { "$ref": "#/$defs/availability" },
+        "notes": { "type": "string" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "optional": { "type": "boolean", "default": false },
+        "default": { "$ref": "#/$defs/literal" },
+        "variadic": { "type": "boolean", "default": false },
+        "description": { "type": "string" },
+        "value_constraints": { "$ref": "#/$defs/value_constraints" },
+        "completion": { "$ref": "#/$defs/completion" },
+        "resource": { "$ref": "#/$defs/resource" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "return_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "resource_kind": { "enum": ["pin", "peripheral", "device", "storage"] }
+      }
+    },
+    "literal": {
+      "type": ["null", "boolean", "integer", "number", "string"]
+    },
+    "value_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minimum": { "type": "number" },
+        "maximum": { "type": "number" },
+        "multiple_of": { "type": "number", "exclusiveMinimum": 0 },
+        "min_length": { "type": "integer", "minimum": 0 },
+        "max_length": { "type": "integer", "minimum": 0 },
+        "pattern": { "type": "string", "format": "regex" },
+        "allowed_values": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/literal" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["literal", "enum", "resource", "identifier", "path", "none"] },
+        "enum": { "$ref": "#/$defs/id" },
+        "quote": { "enum": ["single", "double", "none"] },
+        "placeholder": { "type": "string" }
+      }
+    },
+    "resource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "scope"],
+      "properties": {
+        "kind": { "enum": ["pin", "peripheral", "device", "storage"] },
+        "scope": {
+          "enum": ["board.exposed", "board.all", "board.devices", "board.storage", "chip.all"]
+        },
+        "capability": { "$ref": "#/$defs/capability_requirement" },
+        "bindings": {
+          "type": "object",
+          "propertyNames": { "enum": ["id", "class", "instance", "function", "peripheral", "signal", "route"] },
+          "additionalProperties": { "$ref": "#/$defs/id" }
+        },
+        "allow_reserved": { "type": "boolean", "default": false },
+        "allow_releasable": { "type": "boolean", "default": false },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+    "capability_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "class": { "$ref": "#/$defs/id" },
+        "function": { "type": "string", "minLength": 1 },
+        "peripheral": { "type": "string", "minLength": 1 },
+        "signal": { "type": "string", "minLength": 1 },
+        "route": { "$ref": "#/$defs/id" },
+        "attributes_all": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "members"],
+      "properties": {
+        "kind": { "enum": ["distinct", "same_value", "less_than", "less_or_equal", "greater_than", "greater_or_equal"] },
+        "members": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "message": { "type": "string" }
+      }
+    },
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "target"],
+      "properties": {
+        "kind": { "enum": ["claim", "release", "read", "write"] },
+        "target": { "type": "string", "minLength": 1 },
+        "exclusive": { "type": "boolean", "default": false },
+        "lifetime": { "enum": ["call", "handle", "until_release", "program"] },
+        "group": { "$ref": "#/$defs/id" },
+        "notes": { "type": "string" }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "firmware_features_all": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "chip_features_all": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "board_features_all": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "chip_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "board_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true
+        },
+        "firmware_min": { "$ref": "#/$defs/semver" },
+        "firmware_max_exclusive": { "$ref": "#/$defs/semver" }
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["since", "message"],
+      "properties": {
+        "since": { "$ref": "#/$defs/semver" },
+        "message": { "type": "string", "minLength": 1 },
+        "replacement": { "type": "string", "minLength": 1 },
+        "remove_in": { "$ref": "#/$defs/semver" }
+      }
+    },
+    "snippet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "body"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "body": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "overload": { "$ref": "#/$defs/id" }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*[0-9]{3}$" },
+        "severity": { "enum": ["hint", "info", "warning", "error"] },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "license"],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title"],
+            "properties": {
+              "title": { "type": "string", "minLength": 1 },
+              "revision": { "type": "string" },
+              "url": { "type": "string", "format": "uri" },
+              "retrieved_at": { "type": "string", "format": "date" },
+              "sha256": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" }
+            }
+          }
+        },
+        "license": { "type": "string", "minLength": 1 },
+        "copyright": { "type": "string" },
+        "generated_by": { "type": "string" }
+      }
+    }
+  }
+}

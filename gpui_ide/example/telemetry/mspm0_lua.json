@@ -1,0 +1,5 @@
+{
+  "name": "串口遥测",
+  "target_luac": "main.luac",
+  "main_source": "main.lua"
+}

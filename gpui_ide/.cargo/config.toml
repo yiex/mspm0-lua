@@ -1,0 +1,25 @@
+# LLVM-MinGW build configuration.
+#
+# LLVM_MINGW_LIB must point at the x86_64-w64-mingw32/lib directory of an
+# LLVM-MinGW installation (build.ps1 / build_release.ps1 set it for you).
+[build]
+target = "x86_64-pc-windows-gnullvm"
+
+[target.x86_64-pc-windows-gnullvm]
+linker = "x86_64-w64-mingw32-clang"
+ar = "llvm-ar"
+# Prefer static libunwind.a (build.ps1 renames libunwind.dll.a during link).
+rustflags = [
+  "-L",
+  "native=${LLVM_MINGW_LIB}",
+  "-C",
+  "link-arg=-Wl,-Bstatic",
+  "-C",
+  "link-arg=-lunwind",
+  "-C",
+  "link-arg=-Wl,-Bdynamic",
+]
+
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-clang"
+rustflags = ["-L", "native=${LLVM_MINGW_LIB}"]

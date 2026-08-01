@@ -1,0 +1,212 @@
+{
+  "$schema": "../schemas/api.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "api",
+  "id": "mspm0.lua-bytecode",
+  "version": "0.1.0",
+  "firmware": {
+    "name": "MSPM0 Lua bytecode firmware",
+    "version": "0.1.0",
+    "abi": "mspm0.lua-bytecode",
+    "lua_version": "unspecified",
+    "features": ["i2c", "serial_script_upload", "external_littlefs"]
+  },
+  "compatibility": {
+    "chip_ids": ["ti.mspm0g3507.lqfp48"],
+    "board_ids": ["ti.launchpad-mspm0g3507.rev-a"]
+  },
+  "quality": {
+    "status": "draft",
+    "coverage": "example",
+    "notes": "Only delay_ms and i2c.open are shown. This is not the complete firmware API registry."
+  },
+  "types": [
+    {
+      "id": "pin",
+      "kind": "alias",
+      "lua_type": "string",
+      "base": "string",
+      "description": "Canonical board-exposed pin name."
+    },
+    {
+      "id": "frequency_hz",
+      "kind": "alias",
+      "lua_type": "integer",
+      "base": "integer"
+    }
+  ],
+  "enums": [],
+  "globals": [
+    {
+      "name": "delay_ms",
+      "description": "Delay the current execution context.",
+      "overloads": [
+        {
+          "id": "milliseconds",
+          "params": [
+            {
+              "name": "milliseconds",
+              "type": "integer",
+              "value_constraints": {
+                "minimum": 0
+              }
+            }
+          ],
+          "returns": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "name": "i2c",
+      "description": "I2C controller API.",
+      "functions": [
+        {
+          "name": "open",
+          "description": "Open an I2C controller using a compatible board pin route.",
+          "overloads": [
+            {
+              "id": "controller-pins-frequency",
+              "params": [
+                {
+                  "name": "bus",
+                  "type": "integer",
+                  "resource": {
+                    "kind": "peripheral",
+                    "scope": "chip.all",
+                    "capability": {
+                      "class": "i2c"
+                    },
+                    "bindings": {
+                      "id": "i2c_instance"
+                    }
+                  }
+                },
+                {
+                  "name": "scl",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "single",
+                    "placeholder": "SCL pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SCL"
+                    },
+                    "bindings": {
+                      "peripheral": "i2c_instance",
+                      "route": "i2c_route"
+                    }
+                  }
+                },
+                {
+                  "name": "sda",
+                  "type": "pin",
+                  "completion": {
+                    "kind": "resource",
+                    "quote": "single",
+                    "placeholder": "SDA pin"
+                  },
+                  "resource": {
+                    "kind": "pin",
+                    "scope": "board.exposed",
+                    "capability": {
+                      "class": "i2c",
+                      "signal": "SDA"
+                    },
+                    "bindings": {
+                      "peripheral": "i2c_instance",
+                      "route": "i2c_route"
+                    }
+                  }
+                },
+                {
+                  "name": "frequency",
+                  "type": "frequency_hz",
+                  "value_constraints": {
+                    "minimum": 10000,
+                    "maximum": 1000000
+                  }
+                }
+              ],
+              "returns": [
+                {
+                  "type": "boolean",
+                  "description": "True when the controller was opened."
+                }
+              ],
+              "relations": [
+                {
+                  "kind": "distinct",
+                  "members": ["scl", "sda"],
+                  "message": "SCL and SDA must use different board pins."
+                }
+              ],
+              "effects": [
+                {
+                  "kind": "claim",
+                  "target": "bus",
+                  "exclusive": true,
+                  "lifetime": "until_release",
+                  "group": "i2c-session"
+                },
+                {
+                  "kind": "claim",
+                  "target": "scl",
+                  "exclusive": true,
+                  "lifetime": "until_release",
+                  "group": "i2c-session"
+                },
+                {
+                  "kind": "claim",
+                  "target": "sda",
+                  "exclusive": true,
+                  "lifetime": "until_release",
+                  "group": "i2c-session"
+                }
+              ]
+            }
+          ],
+          "snippets": [
+            {
+              "label": "Open I2C controller",
+              "body": "i2c.open(${1:1}, ${2:'PA15'}, ${3:'PA16'}, ${4:100000})",
+              "overload": "controller-pins-frequency"
+            }
+          ],
+          "availability": {
+            "firmware_features_all": ["i2c"],
+            "chip_features_all": ["i2c"]
+          }
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "API001",
+      "severity": "error",
+      "message": "The function is not present in the selected firmware API."
+    },
+    {
+      "code": "PIN004",
+      "severity": "error",
+      "message": "Selected pins do not share the required peripheral instance and route."
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "title": "Local firmware binding registry mirror and bundled i2c_scan example",
+        "revision": "workspace snapshot 2026-07-27"
+      }
+    ],
+    "license": "CC0-1.0 for this illustrative metadata only; firmware API facts require source verification",
+    "copyright": "Example metadata structure (c) 2026 project contributors"
+  }
+}

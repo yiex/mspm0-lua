@@ -1,0 +1,5 @@
+{
+  "name": "IMU+OLED",
+  "target_luac": "main.luac",
+  "main_source": "main.lua"
+}
